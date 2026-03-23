@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loropo Industries · Contact · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,800;1,300&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0122a;
+  --red-light: #e8192f;
+  --red-glow: rgba(192,18,42,0.4);
+  --green: #0d6b2e;
+  --green-light: #16a34a;
+  --black: #080808;
+  --offwhite: #f2f0eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Barlow',sans-serif;
+  background:var(--black);
+  color:#fff;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── NOISE ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ─── CURSOR ─── */
+#cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;
+  background:var(--red-light);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:background 0.2s,transform 0.15s;
+}
+#cursor.hovered{transform:scale(2.5)!important;background:var(--green-light);}
+#cursor-ring{
+  position:fixed;top:0;left:0;width:32px;height:32px;
+  border:1.5px solid rgba(192,18,42,0.55);border-radius:50%;
+  pointer-events:none;z-index:9998;
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:70px;padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.45);
+  backdrop-filter:blur(24px) saturate(1.5);
+  -webkit-backdrop-filter:blur(24px) saturate(1.5);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  transition:background 0.4s;
+}
+nav.scrolled{background:rgba(8,8,8,0.9);}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:0.1em;
+  background:linear-gradient(100deg,#fff 0%,var(--red-light) 45%,var(--green-light) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:2.4rem;list-style:none;}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.75rem;
+  letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.6);
+  text-decoration:none;position:relative;transition:color 0.2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-5px;left:0;width:0;height:1.5px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));transition:width 0.3s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:0.55rem 1.5rem;border:1px solid var(--red);border-radius:2px;
+  background:linear-gradient(135deg,var(--red),#d01428);
+  color:#fff;cursor:none;transition:all 0.25s;
+  box-shadow:0 0 18px rgba(192,18,42,0.3);
+}
+.nav-cta:hover{box-shadow:0 0 32px rgba(192,18,42,0.55);transform:scale(1.04);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;}
+
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:190;
+  background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Bebas Neue';font-size:3.5rem;color:#fff;text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--red-light);}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:2rem;cursor:none;line-height:1;}
+
+.stripe{
+  height:3px;
+  background:repeating-linear-gradient(90deg,var(--red) 0%,var(--red) 33.3%,var(--green-light) 33.3%,var(--green-light) 66.6%,#1a1a1a 66.6%,#1a1a1a 100%);
+}
+
+.s-inner{max-width:1280px;margin:0 auto;}
+.s-tag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;
+  letter-spacing:0.32em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:0.6rem;margin-bottom:1rem;
+}
+.s-tag .dot{width:5px;height:5px;border-radius:50%;}
+.s-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);line-height:0.93;letter-spacing:0.02em;}
+.t-red{background:linear-gradient(135deg,var(--red-light),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.t-green{background:linear-gradient(135deg,var(--green-light),#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+
+.hero{
+  position:relative;height:80vh;min-height:560px;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('./assets/miningequip.png');
+  background-size:cover;background-position:center 40%;
+  filter:brightness(0.28) saturate(0.6);
+  transform:scale(1.05);transition:transform 0.6s ease;
+}
+.hero-bg.loaded{transform:scale(1);}
+.hero-ov1{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(8,8,8,0.2) 0%,rgba(8,8,8,0.55) 45%,rgba(8,8,8,0.97) 100%);
+}
+.hero-ov2{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(90deg,rgba(192,18,42,0.1) 0%,transparent 35%,transparent 65%,rgba(13,107,46,0.1) 100%);
+}
+.hero-blob{position:absolute;z-index:2;border-radius:50%;pointer-events:none;}
+.hero-blob-1{
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(192,18,42,0.13) 0%,transparent 70%);
+  top:-300px;left:-250px;animation:b1 14s ease-in-out infinite;
+}
+.hero-blob-2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(13,107,46,0.13) 0%,transparent 70%);
+  bottom:-200px;right:-150px;animation:b2 12s ease-in-out infinite;
+}
+@keyframes b1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes b2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-40px)}}
+
+.hero-content{
+  position:relative;z-index:4;
+  width:100%;max-width:1280px;margin:0 auto;
+  padding:0 2.5rem 5rem;
+}
+.hero-breadcrumb{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;
+}
+.hero-breadcrumb span{color:var(--red-light);}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,13vw,11rem);
+  line-height:0.88;letter-spacing:0.01em;color:#fff;
+}
+.hero-sub{
+  font-size:clamp(0.9rem,1.5vw,1.1rem);font-weight:300;
+  color:rgba(255,255,255,0.5);max-width:500px;
+  line-height:1.75;margin-top:1.3rem;
+}
+
+.emergency-strip{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--red) 0%,#a50f20 100%);
+  padding:1.1rem 2.5rem;
+}
+.emergency-strip::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 40px);
+}
+.emergency-strip-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  gap:1.5rem;flex-wrap:wrap;position:relative;z-index:2;
+}
+.es-badge{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.22em;
+  text-transform:uppercase;padding:0.28rem 0.85rem;
+  border:1px solid rgba(255,255,255,0.35);border-radius:2px;color:rgba(255,255,255,0.75);
+}
+.es-text{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;
+  letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.85);
+}
+.es-num{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff;letter-spacing:0.06em;
+}
+
+.contact-section{
+  padding:7rem 2.5rem;
+  background:linear-gradient(160deg,#0a0a0a 0%,#0e0608 50%,#080e08 100%);
+  position:relative;overflow:hidden;
+}
+.contact-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 30% 50%,rgba(192,18,42,0.06) 0%,transparent 50%);
+}
+.contact-section::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 70% 80%,rgba(13,107,46,0.05) 0%,transparent 50%);
+}
+.contact-layout{
+  display:grid;grid-template-columns:1fr 1.65fr;
+  gap:3.5rem;align-items:start;position:relative;z-index:2;
+}
+
+.contact-methods{
+  display:flex;flex-direction:column;gap:0;
+  border:1.5px solid rgba(255,255,255,0.07);
+  border-radius:8px;overflow:hidden;
+  margin-top:2rem;
+}
+.contact-card{
+  display:flex;align-items:center;gap:1.4rem;
+  padding:1.6rem 1.6rem;
+  background:rgba(255,255,255,0.03);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  cursor:none;transition:all 0.28s;
+  position:relative;overflow:hidden;
+  text-decoration:none;color:#fff;
+}
+.contact-card:last-child{border-bottom:none;}
+.contact-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--red),var(--green-light));
+  transform:scaleY(0);transition:transform 0.32s;transform-origin:top;
+}
+.contact-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.04) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.28s;
+}
+.contact-card:hover::before{transform:scaleY(1);}
+.contact-card:hover::after{opacity:1;}
+.contact-card:hover{
+  background:rgba(255,255,255,0.07);
+  transform:translateX(5px);
+}
+.cc-icon{
+  width:50px;height:50px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;transition:transform 0.25s;
+}
+.contact-card:hover .cc-icon{transform:scale(1.1);}
+.cc-icon.r{background:rgba(192,18,42,0.12);border:1px solid rgba(192,18,42,0.25);}
+.cc-icon.g{background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.25);}
+.cc-icon.w{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);}
+.cc-icon.a{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.22);}
+.cc-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:0.2rem;
+}
+.cc-value{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:1rem;letter-spacing:0.04em;color:#fff;line-height:1.2;
+}
+.cc-sub{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.76rem;
+  color:rgba(255,255,255,0.32);margin-top:0.12rem;
+}
+
+.quick-glass{
+  margin-top:1.5rem;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.08);border-radius:6px;
+  padding:1.4rem 1.6rem;
+}
+.quick-title{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:1rem;
+}
+.quick-row{
+  display:flex;align-items:center;gap:0.8rem;
+  padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.05);
+  cursor:none;transition:all 0.2s;
+}
+.quick-row:last-child{border-bottom:none;}
+.quick-row:hover{padding-left:0.5rem;}
+.quick-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;transition:background 0.2s;}
+.quick-row:hover .quick-dot{background:var(--red-light)!important;}
+.quick-key{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);min-width:85px;
+}
+.quick-val{font-family:'Barlow',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.5);}
+
+.response-badge{
+  display:flex;align-items:center;gap:0.8rem;
+  margin-top:1.5rem;padding:1rem 1.3rem;
+  background:rgba(22,163,74,0.07);
+  border:1px solid rgba(22,163,74,0.22);
+  border-radius:6px;
+}
+.r-pulse{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green-light);flex-shrink:0;
+  animation:rp 1.5s ease infinite;
+}
+@keyframes rp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.65)}}
+.r-text{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--green-light);
+}
+
+.form-wrap{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:2.8rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.35);
+}
+.form-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light),#1a1a1a);
+}
+.form-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.03) 0%,transparent 50%,rgba(13,107,46,0.03) 100%);
+  pointer-events:none;
+}
+.form-title{
+  font-family:'Bebas Neue',sans-serif;font-size:2.2rem;
+  letter-spacing:0.04em;color:#fff;margin-bottom:0.3rem;
+  position:relative;z-index:1;
+}
+.form-subtitle{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.85rem;
+  color:rgba(255,255,255,0.38);margin-bottom:2rem;
+  position:relative;z-index:1;
+}
+.form-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.2rem;position:relative;z-index:1;
+}
+.form-field{display:flex;flex-direction:column;gap:0.4rem;}
+.form-field.full{grid-column:span 2;}
+.form-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);transition:color 0.2s;
+}
+.form-label.active{color:var(--red-light);}
+.form-input{
+  font-family:'Barlow',sans-serif;font-size:0.88rem;font-weight:400;
+  padding:0.85rem 1.1rem;
+  background:rgba(255,255,255,0.07);
+  border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:4px;color:#fff;
+  transition:all 0.25s;outline:none;width:100%;cursor:none;
+}
+.form-input:focus{
+  border-color:var(--red-light);
+  background:rgba(255,255,255,0.1);
+  box-shadow:0 0 0 3px rgba(192,18,42,0.12);
+}
+.form-input::placeholder{color:rgba(255,255,255,0.2);}
+.form-input option{background:#1a1a1a;color:#fff;}
+select.form-input{
+  appearance:none;cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+}
+textarea.form-input{resize:vertical;min-height:115px;line-height:1.65;}
+
+.form-submit{
+  grid-column:span 2;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:0.5rem;gap:1rem;flex-wrap:wrap;
+}
+.submit-btn{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:1rem 2.4rem;border:none;cursor:none;
+  background:linear-gradient(135deg,var(--red),var(--red-light));
+  color:#fff;border-radius:3px;
+  position:relative;overflow:hidden;
+  transition:all 0.3s;
+  box-shadow:0 4px 24px rgba(192,18,42,0.4);
+  display:flex;align-items:center;gap:0.6rem;
+}
+.submit-btn::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+  transition:left 0.5s;
+}
+.submit-btn:hover::after{left:100%;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(192,18,42,0.6);}
+.submit-note{
+  font-family:'Barlow',sans-serif;font-weight:300;
+  font-size:0.72rem;color:rgba(255,255,255,0.25);
+}
+
+
+.form-success{
+  display:none;text-align:center;padding:3.5rem 2rem;
+  position:relative;z-index:1;
+}
+.form-success.show{display:block;}
+.form-success-icon{font-size:3.5rem;margin-bottom:1rem;}
+.form-success-title{
+  font-family:'Bebas Neue',sans-serif;font-size:2.8rem;
+  color:#4ade80;line-height:1;
+}
+.form-success-text{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.92rem;
+  color:rgba(255,255,255,0.45);margin-top:0.7rem;line-height:1.7;
+}
+.reset-btn{
+  margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.8rem 2rem;border:1px solid rgba(255,255,255,0.2);
+  border-radius:3px;background:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.6);cursor:none;transition:all 0.25s;
+}
+.reset-btn:hover{background:rgba(255,255,255,0.12);color:#fff;}
+
+
+.map-section{
+  position:relative;padding:7rem 2.5rem;
+  background:#0b0b0b;overflow:hidden;
+}
+.map-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.016'%3E%3Cpath d='M20 0L40 20L20 40L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.map-layout{
+  display:grid;grid-template-columns:1fr 2.5fr;
+  gap:2.5rem;margin-top:3.5rem;align-items:start;
+}
+
+
+.offices-list{
+  border:1.5px solid rgba(255,255,255,0.07);
+  border-radius:8px;overflow:hidden;
+}
+.office-item{
+  padding:1.5rem 1.4rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:all 0.25s;cursor:none;position:relative;overflow:hidden;
+}
+.office-item:last-child{border-bottom:none;}
+.office-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),var(--green-light));
+  transform:scaleY(0);transition:transform 0.3s;transform-origin:top;
+}
+.office-item:hover::before{transform:scaleY(1);}
+.office-item:hover{background:rgba(255,255,255,0.04);padding-left:1.8rem;}
+.office-dot{width:6px;height:6px;border-radius:50%;margin-bottom:0.6rem;}
+.office-name{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:#fff;margin-bottom:0.2rem;
+}
+.office-role{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:0.5rem;
+}
+.office-addr{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.8rem;
+  color:rgba(255,255,255,0.38);line-height:1.6;
+}
+
+.map-visual{
+  border-radius:8px;overflow:hidden;
+  position:relative;height:440px;
+  border:1.5px solid rgba(255,255,255,0.07);
+}
+.map-embed{
+  width:100%;height:100%;border:none;
+  filter:grayscale(0.6) contrast(1.1) brightness(0.8) invert(0.1);
+  transition:filter 0.4s;
+}
+.map-visual:hover .map-embed{filter:grayscale(0.2) contrast(1) brightness(0.9) invert(0);}
+.map-glass-tag{
+  position:absolute;top:1.2rem;left:1.2rem;
+  background:rgba(8,8,8,0.7);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.12);border-radius:4px;
+  padding:0.65rem 1.1rem;
+}
+.map-glass-tag span{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.42);
+}
+.map-glass-tag strong{
+  display:block;font-family:'Bebas Neue',sans-serif;
+  font-size:1.15rem;color:#fff;letter-spacing:0.08em;
+}
+
+.social-section{
+  background:var(--offwhite);padding:6rem 2.5rem;
+  position:relative;overflow:hidden;
+}
+.social-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(192,18,42,0.04) 0%,transparent 55%);
+}
+.social-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1.5px;background:rgba(0,0,0,0.08);
+  border-radius:6px;overflow:hidden;
+  margin-top:3rem;
+  position:relative;z-index:2;
+}
+.social-card{
+  background:var(--offwhite);padding:2rem 1.5rem;
+  transition:all 0.3s;cursor:none;
+  position:relative;overflow:hidden;text-align:center;
+}
+.social-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transition:transform 0.38s;
+}
+.social-card:hover::after{transform:scaleX(1);}
+.social-card:hover{background:#fff;transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,0.1);}
+.social-icon{
+  font-family:'Bebas Neue',sans-serif;font-size:2.5rem;
+  line-height:1;margin-bottom:0.6rem;display:block;
+  transition:transform 0.25s;
+}
+.social-card:hover .social-icon{transform:scale(1.12);}
+.social-name{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;
+  letter-spacing:0.18em;text-transform:uppercase;color:#0a0a0a;margin-bottom:0.3rem;
+}
+.social-handle{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.78rem;color:rgba(0,0,0,0.38);}
+
+footer{background:#060606;padding:3.5rem 2.5rem 2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-inner{max-width:1280px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;background:linear-gradient(90deg,#fff,rgba(255,255,255,0.35));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.8rem;}
+.footer-tagline{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(255,255,255,0.28);line-height:1.7;}
+.footer-dots{display:flex;gap:0.35rem;margin-top:1.2rem;}
+.footer-dot{width:7px;height:7px;border-radius:50%;}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:1rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.footer-links a{font-family:'Barlow',sans-serif;font-size:0.83rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.82);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.footer-sub-links{display:flex;gap:1.5rem;}
+.footer-sub-links a{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.18);text-decoration:none;transition:color 0.2s;}
+.footer-sub-links a:hover{color:rgba(255,255,255,0.6);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fa{opacity:0;animation:fadeUp 0.75s ease forwards;}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.25s}.d3{animation-delay:0.4s}.d4{animation-delay:0.55s}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-right{opacity:0;transform:translateX(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+
+@media(max-width:1100px){
+  .contact-layout{grid-template-columns:1fr;gap:3rem;}
+  .map-layout{grid-template-columns:1fr;}
+  .map-visual{height:320px;}
+  .social-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 1.2rem;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .contact-section,.map-section,.social-section{padding:4.5rem 1.2rem;}
+  .form-wrap{padding:2rem 1.4rem;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-field.full{grid-column:span 1;}
+  .form-submit{grid-column:span 1;flex-direction:column;align-items:flex-start;}
+  .hero-content{padding:0 1.2rem 4rem;}
+  .emergency-strip{padding:1rem 1.2rem;}
+  .emergency-strip-inner{flex-direction:column;gap:0.5rem;text-align:center;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+}
+@media(max-width:480px){
+  .social-grid{grid-template-columns:1fr 1fr;}
+  .hero-title{font-size:4.5rem;}
+  .hero{height:75vh;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+
+<nav id="mainNav">
+  <div class="nav-logo">LOROPO</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="nav-cta">Download Profile ↓</button>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-breadcrumb fa d1">Home <span>/</span> Contact</div>
+    <h1 class="hero-title fa d2">
+      GET IN<br>
+      <span class="t-red">TOUCH</span>
+    </h1>
+    <p class="hero-sub fa d3">We mobilise fast. Whether it's a proposal, an emergency callout, or a tender inquiry — our team responds within 24 hours.</p>
+  </div>
+</div>
+
+<div class="emergency-strip">
+  <div class="emergency-strip-inner">
+    <span class="es-badge">⚡ 24/7</span>
+    <span class="es-text">Emergency Breakdown Response</span>
+    <span class="es-num">+27 (0)53 712 3456</span>
+    <span class="es-text">· Kathu · Sishen · Hotazel ·</span>
+    <span class="es-badge">2-Hr Mobilisation</span>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+
+<section class="contact-section">
+  <div class="s-inner contact-layout">
+
+
+    <div>
+      <div class="reveal">
+        <p class="s-tag" style="color:var(--red-light)"><span class="dot" style="background:var(--red-light)"></span> Direct Lines</p>
+        <h2 class="s-title" style="color:#fff;">REACH<br><span class="t-red">US</span></h2>
+      </div>
+
+      <div class="contact-methods reveal" style="transition-delay:0.1s">
+        <a class="contact-card" href="tel:+27537123456">
+          <div class="cc-icon r">📞</div>
+          <div>
+            <div class="cc-label">Main Office</div>
+            <div class="cc-value">+27 (0)53 712 3456</div>
+            <div class="cc-sub">Mon–Fri, 07:00–17:00</div>
+          </div>
+        </a>
+        <a class="contact-card" href="tel:+27825557890">
+          <div class="cc-icon a">🚨</div>
+          <div>
+            <div class="cc-label">After Hours / Emergency</div>
+            <div class="cc-value">+27 (0)82 555 7890</div>
+            <div class="cc-sub">24/7 · 365 days</div>
+          </div>
+        </a>
+        <a class="contact-card" href="mailto:info@loropo.co.za">
+          <div class="cc-icon g">✉️</div>
+          <div>
+            <div class="cc-label">General Email</div>
+            <div class="cc-value">info@loropo.co.za</div>
+            <div class="cc-sub">Response within 24 hrs</div>
+          </div>
+        </a>
+        <a class="contact-card" href="mailto:tenders@loropo.co.za">
+          <div class="cc-icon w">📁</div>
+          <div>
+            <div class="cc-label">Tenders &amp; Proposals</div>
+            <div class="cc-value">tenders@loropo.co.za</div>
+            <div class="cc-sub">Include scope &amp; timeline</div>
+          </div>
+        </a>
+        <div class="contact-card" style="cursor:default;">
+          <div class="cc-icon w">📍</div>
+          <div>
+            <div class="cc-label">Head Office</div>
+            <div class="cc-value">27 Hendrik van Eck Rd</div>
+            <div class="cc-sub">Kathu, Northern Cape, 8446</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-glass reveal" style="transition-delay:0.2s">
+        <div class="quick-title">Additional Contacts</div>
+        <div class="quick-row">
+          <div class="quick-dot" style="background:var(--green-light)"></div>
+          <div class="quick-key">Procurement</div>
+          <div class="quick-val">procurement@loropo.co.za</div>
+        </div>
+        <div class="quick-row">
+          <div class="quick-dot" style="background:var(--green-light)"></div>
+          <div class="quick-key">Safety</div>
+          <div class="quick-val">safety@loropo.co.za</div>
+        </div>
+        <div class="quick-row">
+          <div class="quick-dot" style="background:rgba(255,255,255,0.25)"></div>
+          <div class="quick-key">HR / Careers</div>
+          <div class="quick-val">hr@loropo.co.za</div>
+        </div>
+      </div>
+
+      <div class="response-badge reveal" style="transition-delay:0.28s">
+        <div class="r-pulse"></div>
+        <div class="r-text">We respond within 24 hours on weekdays</div>
+      </div>
+    </div>
+
+    <div class="form-wrap reveal-right" style="transition-delay:0.12s">
+      <div id="formView">
+        <div class="form-title">SEND A MESSAGE</div>
+        <div class="form-subtitle">Project inquiry, service request, or general question — we're listening.</div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label" id="lName">Full Name *</label>
+            <input type="text" class="form-input" placeholder="John Molefe" id="fName">
+          </div>
+          <div class="form-field">
+            <label class="form-label" id="lCompany">Company</label>
+            <input type="text" class="form-input" placeholder="Kumba Iron Ore" id="fCompany">
+          </div>
+          <div class="form-field">
+            <label class="form-label" id="lEmail">Email Address *</label>
+            <input type="email" class="form-input" placeholder="john@company.co.za" id="fEmail">
+          </div>
+          <div class="form-field">
+            <label class="form-label" id="lPhone">Phone Number</label>
+            <input type="tel" class="form-input" placeholder="+27 82 000 0000" id="fPhone">
+          </div>
+          <div class="form-field full">
+            <label class="form-label" id="lService">Service Interest *</label>
+            <select class="form-input" id="fService">
+              <option value="">— Select a service —</option>
+              <option>Fixed Plant Maintenance</option>
+              <option>Mining Equipment Maintenance</option>
+              <option>Auctioneering Services</option>
+              <option>Heavy Logistics &amp; Materials</option>
+              <option>Earthworks &amp; Civil</option>
+              <option>Project Management</option>
+              <option>Shaft Sinking &amp; Development</option>
+              <option>Emergency Breakdown Response</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label class="form-label" id="lSite">Project Location / Site</label>
+            <input type="text" class="form-input" placeholder="e.g. Sishen Mine, Northern Cape" id="fSite">
+          </div>
+          <div class="form-field full">
+            <label class="form-label" id="lMessage">Message *</label>
+            <textarea class="form-input" placeholder="Describe your project, scope, or requirements..." id="fMessage"></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="button" class="submit-btn" id="submitBtn">
+              <span>Send Message</span>
+              <span>→</span>
+            </button>
+            <span class="submit-note">* Required fields. No spam, ever.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-success" id="successView">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-title">MESSAGE SENT</div>
+        <p class="form-success-text">Thank you — we'll be in touch within 24 hours.<br>For urgent matters, call +27 (0)53 712 3456.</p>
+        <button class="reset-btn" onclick="resetForm()">Send Another →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<section class="map-section">
+  <div class="s-inner" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <p class="s-tag" style="color:rgba(255,255,255,0.35)"><span class="dot" style="background:var(--red-light)"></span> Where We Operate</p>
+      <h2 class="s-title" style="color:#fff;">REGIONAL<br><span class="t-green">FOOTPRINT</span></h2>
+    </div>
+    <div class="map-layout">
+      <div class="offices-list reveal" style="transition-delay:0.05s">
+        <div class="office-item">
+          <div class="office-dot" style="background:var(--red-light)"></div>
+          <div class="office-name">Kathu</div>
+          <div class="office-role">Head Office</div>
+          <div class="office-addr">27 Hendrik van Eck Rd<br>Kathu, 8446, NC</div>
+        </div>
+        <div class="office-item">
+          <div class="office-dot" style="background:var(--green-light)"></div>
+          <div class="office-name">Sishen</div>
+          <div class="office-role">Site Office · Kumba</div>
+          <div class="office-addr">On-site at Kumba Iron Ore<br>Sishen Mine, NC</div>
+        </div>
+        <div class="office-item">
+          <div class="office-dot" style="background:rgba(255,255,255,0.5)"></div>
+          <div class="office-name">Hotazel</div>
+          <div class="office-role">Workshop &amp; Depot</div>
+          <div class="office-addr">John Taolo Gaetsewe<br>District, NC</div>
+        </div>
+        <div class="office-item">
+          <div class="office-dot" style="background:rgba(250,200,50,0.7)"></div>
+          <div class="office-name">Kolomela</div>
+          <div class="office-role">Site Office · Anglo</div>
+          <div class="office-addr">Anglo American<br>Kolomela Mine, NC</div>
+        </div>
+      </div>
+
+      <div class="map-visual reveal" style="transition-delay:0.15s">
+        <iframe
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228648.3!2d22.9!3d-27.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9d4b4b4b4b4b4b%3A0x1!2sKathu%2C+Northern+Cape!5e0!3m2!1sen!2sza!4v1620000000000!5m2!1sen!2sza"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-glass-tag">
+          <span>Head Office</span>
+          <strong>Kathu, Northern Cape</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="social-section">
+  <div class="s-inner" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <p class="s-tag" style="color:var(--red)"><span class="dot" style="background:var(--red)"></span> Stay Connected</p>
+      <h2 class="s-title" style="color:#0a0a0a;">FOLLOW<br><span class="t-red">LOROPO</span></h2>
+    </div>
+    <div class="social-grid">
+      <div class="social-card reveal" style="transition-delay:0.05s">
+        <span class="social-icon" style="color:#0a66c2">in</span>
+        <div class="social-name">LinkedIn</div>
+        <div class="social-handle">@LoropoIndustries</div>
+      </div>
+      <div class="social-card reveal" style="transition-delay:0.12s">
+        <span class="social-icon" style="color:#1877f2">f</span>
+        <div class="social-name">Facebook</div>
+        <div class="social-handle">Loropo Industries</div>
+      </div>
+      <div class="social-card reveal" style="transition-delay:0.2s">
+        <span class="social-icon" style="color:#0a0a0a">𝕏</span>
+        <div class="social-name">X · Twitter</div>
+        <div class="social-handle">@Loropo_Ind</div>
+      </div>
+      <div class="social-card reveal" style="transition-delay:0.28s">
+        <span class="social-icon" style="color:#ff0000">▶</span>
+        <div class="social-name">YouTube</div>
+        <div class="social-handle">Loropo Industries</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">LOROPO INDUSTRIES</div>
+        <p class="footer-tagline">Integrated mining support services across the Northern Cape basin. Est. 2008. Built to last.</p>
+        <div class="footer-dots">
+          <div class="footer-dot" style="background:var(--red)"></div>
+          <div class="footer-dot" style="background:var(--green-light)"></div>
+          <div class="footer-dot" style="background:rgba(255,255,255,0.18)"></div>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="services.html">Plant Maintenance</a></li>
+          <li><a href="services.html">Equipment Repair</a></li>
+          <li><a href="services.html">Auctioneering</a></li>
+          <li><a href="services.html">Heavy Logistics</a></li>
+          <li><a href="services.html">Shaft Sinking</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">B-BBEE Certificate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Loropo Industries Pty Ltd · All Rights Reserved</span>
+      <div class="footer-sub-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">B-BBEE Cert</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function loop(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.contact-card,.social-card,.office-item,.quick-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('hovered'));
+});
+
+setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),80);
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-right').forEach(r=>obs.observe(r));
+
+const nav=document.getElementById('mainNav');
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  if(heroBg) heroBg.style.transform=`translateY(${window.scrollY*0.3}px)`;
+});
+
+document.querySelectorAll('.form-input').forEach(input=>{
+  const label=input.closest('.form-field')?.querySelector('.form-label');
+  if(!label) return;
+  input.addEventListener('focus',()=>label.classList.add('active'));
+  input.addEventListener('blur',()=>label.classList.remove('active'));
+});
+
+document.getElementById('submitBtn').addEventListener('click',()=>{
+  const name=document.getElementById('fName').value.trim();
+  const email=document.getElementById('fEmail').value.trim();
+  const msg=document.getElementById('fMessage').value.trim();
+
+  let hasError=false;
+  [
+    {el:document.getElementById('fName'),val:name},
+    {el:document.getElementById('fEmail'),val:email},
+    {el:document.getElementById('fMessage'),val:msg}
+  ].forEach(({el,val})=>{
+    if(!val){
+      el.style.borderColor='var(--red-light)';
+      el.style.boxShadow='0 0 0 3px rgba(192,18,42,0.15)';
+      hasError=true;
+      setTimeout(()=>{el.style.borderColor='';el.style.boxShadow='';},2500);
+    }
+  });
+  if(hasError) return;
+
+  const fv=document.getElementById('formView');
+  fv.style.opacity='0';fv.style.transform='translateY(-12px)';fv.style.transition='all 0.35s ease';
+  setTimeout(()=>{
+    fv.style.display='none';
+    const sv=document.getElementById('successView');
+    sv.classList.add('show');
+    sv.style.opacity='0';sv.style.transform='translateY(14px)';sv.style.transition='all 0.4s ease';
+    setTimeout(()=>{sv.style.opacity='1';sv.style.transform='translateY(0)';},20);
+  },340);
+});
+
+function resetForm(){
+  const sv=document.getElementById('successView');
+  sv.classList.remove('show');
+  const fv=document.getElementById('formView');
+  fv.style.display='block';fv.style.opacity='0';fv.style.transform='translateY(8px)';
+  fv.style.transition='all 0.4s ease';
+  setTimeout(()=>{fv.style.opacity='1';fv.style.transform='translateY(0)';},20);
+  ['fName','fEmail','fPhone','fCompany','fSite','fMessage'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  document.getElementById('fService').selectedIndex=0;
+}
+</script>
+</body>
+</html>

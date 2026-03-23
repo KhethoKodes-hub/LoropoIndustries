@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loropo Industries · About Us · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,800;1,300&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0122a;
+  --red-light: #e8192f;
+  --red-glow: rgba(192,18,42,0.4);
+  --green: #0d6b2e;
+  --green-light: #16a34a;
+  --green-glow: rgba(13,107,46,0.35);
+  --black: #080808;
+  --offwhite: #f2f0eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Barlow',sans-serif;
+  background:var(--black);
+  color:#fff;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── NOISE ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ─── CURSOR ─── */
+#cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;
+  background:var(--red-light);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:background 0.2s,transform 0.15s;
+}
+#cursor.hovered{transform:scale(2.5)!important;background:var(--green-light);}
+#cursor-ring{
+  position:fixed;top:0;left:0;width:32px;height:32px;
+  border:1.5px solid rgba(192,18,42,0.55);border-radius:50%;
+  pointer-events:none;z-index:9998;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:70px;padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.45);
+  backdrop-filter:blur(24px) saturate(1.5);
+  -webkit-backdrop-filter:blur(24px) saturate(1.5);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  transition:background 0.4s;
+}
+nav.scrolled{background:rgba(8,8,8,0.9);}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:0.1em;
+  background:linear-gradient(100deg,#fff 0%,var(--red-light) 45%,var(--green-light) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:2.4rem;list-style:none;}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.75rem;
+  letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.6);
+  text-decoration:none;position:relative;transition:color 0.2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-5px;left:0;width:0;height:1.5px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));transition:width 0.3s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:0.55rem 1.5rem;border:1px solid var(--red);border-radius:2px;
+  background:linear-gradient(135deg,var(--red),#d01428);
+  color:#fff;cursor:none;transition:all 0.25s;
+  box-shadow:0 0 18px rgba(192,18,42,0.3);
+}
+.nav-cta:hover{box-shadow:0 0 32px rgba(192,18,42,0.55);transform:scale(1.04);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;}
+
+/* ─── MOBILE NAV ─── */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:190;
+  background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Bebas Neue';font-size:3.5rem;color:#fff;text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--red-light);}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:2rem;cursor:none;line-height:1;}
+
+/* ─── STRIPE ─── */
+.stripe{
+  height:3px;
+  background:repeating-linear-gradient(90deg,var(--red) 0%,var(--red) 33.3%,var(--green-light) 33.3%,var(--green-light) 66.6%,#1a1a1a 66.6%,#1a1a1a 100%);
+}
+
+/* ─── SHARED ─── */
+section{padding:7rem 2.5rem;}
+.s-inner{max-width:1280px;margin:0 auto;}
+.s-tag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;
+  letter-spacing:0.32em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:0.6rem;margin-bottom:1rem;
+}
+.s-tag .dot{width:5px;height:5px;border-radius:50%;}
+.s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  line-height:0.93;letter-spacing:0.02em;
+}
+.t-red{background:linear-gradient(135deg,var(--red-light),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.t-green{background:linear-gradient(135deg,var(--green-light),#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('./assets/hero2.png');
+  background-size:cover;background-position:center 20%;
+  filter:brightness(0.35) saturate(0.65);
+  transform:scale(1.05);transition:transform 0.6s ease;
+}
+.hero-bg.loaded{transform:scale(1);}
+.hero-ov1{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(8,8,8,0.3) 0%,rgba(8,8,8,0.55) 45%,rgba(8,8,8,0.95) 100%);
+}
+.hero-ov2{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(90deg,rgba(192,18,42,0.1) 0%,transparent 40%,transparent 60%,rgba(13,107,46,0.12) 100%);
+}
+/* Gradient blobs */
+.hero-blob{
+  position:absolute;z-index:2;border-radius:50%;pointer-events:none;
+}
+.hero-blob-1{
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(192,18,42,0.15) 0%,transparent 70%);
+  top:-300px;left:-250px;
+  animation:b1 14s ease-in-out infinite;
+}
+.hero-blob-2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(13,107,46,0.15) 0%,transparent 70%);
+  bottom:-200px;right:-150px;
+  animation:b2 12s ease-in-out infinite;
+}
+@keyframes b1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes b2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-40px)}}
+
+.hero-content{
+  position:relative;z-index:4;
+  width:100%;max-width:1280px;margin:0 auto;
+  padding:0 2.5rem 5rem;
+}
+.hero-breadcrumb{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;
+}
+.hero-breadcrumb span{color:var(--red-light);}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,13vw,11rem);
+  line-height:0.88;letter-spacing:0.01em;color:#fff;
+}
+.hero-sub{
+  font-size:clamp(0.9rem,1.5vw,1.1rem);font-weight:300;
+  color:rgba(255,255,255,0.52);max-width:520px;
+  line-height:1.75;margin-top:1.3rem;
+}
+/* Vertical scroll indicator */
+.scroll-vert{
+  position:absolute;right:3rem;bottom:3rem;z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+}
+.scroll-vert span{
+  font-family:'Barlow Condensed';font-size:0.6rem;letter-spacing:0.3em;
+  text-transform:uppercase;color:rgba(255,255,255,0.28);
+  writing-mode:vertical-rl;
+}
+.scroll-vert-line{
+  width:1px;height:56px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0.4),transparent);
+  animation:vPulse 2s ease infinite;
+}
+@keyframes vPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* ─── STORY / TIMELINE ─── */
+.story-section{
+  background:linear-gradient(160deg,#0a0a0a 0%,#100608 50%,#080e08 100%);
+  position:relative;overflow:hidden;
+}
+.story-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.story-blob{
+  position:absolute;z-index:0;border-radius:50%;pointer-events:none;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(192,18,42,0.06) 0%,transparent 70%);
+  top:-200px;right:-200px;
+}
+
+.story-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:start;
+  position:relative;z-index:2;
+}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;}
+.tl-item{
+  display:grid;grid-template-columns:90px 1fr;
+  gap:1.5rem;padding:1.8rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:relative;transition:all 0.25s;cursor:none;
+}
+.tl-item:last-child{border-bottom:none;}
+.tl-item:hover{padding-left:0.6rem;}
+.tl-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(to bottom,rgba(192,18,42,0.15),transparent);
+  transition:width 0.3s;
+}
+.tl-item:hover::before{width:100%;}
+.tl-year{
+  font-family:'Bebas Neue',sans-serif;font-size:2.2rem;
+  color:rgba(255,255,255,0.1);line-height:1;
+  transition:color 0.25s;flex-shrink:0;padding-top:0.1rem;
+}
+.tl-item:hover .tl-year{color:var(--red-light);}
+.tl-title{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:0.92rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:#fff;margin-bottom:0.3rem;
+}
+.tl-text{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.85rem;
+  color:rgba(255,255,255,0.42);line-height:1.65;
+}
+.tl-tag{
+  display:inline-block;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.2rem 0.65rem;border-radius:2px;border:1px solid;margin-top:0.5rem;
+}
+.tl-tag.r{color:var(--red-light);border-color:rgba(192,18,42,0.35);background:rgba(192,18,42,0.07);}
+.tl-tag.g{color:#4ade80;border-color:rgba(22,163,74,0.35);background:rgba(22,163,74,0.07);}
+
+/* Sticky right panel */
+.story-right{position:sticky;top:100px;}
+.story-img-wrap{
+  position:relative;border-radius:8px;overflow:hidden;height:500px;
+}
+.story-img{
+  width:100%;height:100%;
+  background-image:url('./assets/mission.png');
+  background-size:cover;background-position:center;
+  filter:brightness(0.65) saturate(0.75);
+  transition:filter 0.4s;
+}
+.story-img-wrap:hover .story-img{filter:brightness(0.75) saturate(0.9);}
+.story-img-gloss{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.2) 0%,transparent 45%,rgba(13,107,46,0.18) 100%);
+}
+
+/* Floating glass badges */
+.story-badge-1{
+  position:absolute;bottom:1.5rem;left:-1.5rem;
+  background:rgba(8,8,8,0.7);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:6px;
+  padding:1.3rem 1.6rem;
+}
+.story-badge-1-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red-light);line-height:1;}
+.story-badge-1-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.38);}
+
+.story-badge-2{
+  position:absolute;top:1.5rem;right:-1.5rem;
+  background:rgba(13,107,46,0.75);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(22,163,74,0.25);border-radius:6px;
+  padding:1rem 1.4rem;text-align:center;
+}
+.story-badge-2-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#fff;line-height:1;}
+.story-badge-2-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+
+/* Mission glass card */
+.mission-glass{
+  margin-top:2.5rem;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-left:3px solid var(--red-light);
+  border-radius:6px;padding:1.8rem 2rem;
+  position:relative;overflow:hidden;
+}
+.mission-glass::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.04) 0%,transparent 60%);
+}
+.mission-glass-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:0.7rem;position:relative;
+}
+.mission-glass-text{
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:1rem;
+  color:#fff;line-height:1.65;position:relative;
+}
+.mission-glass-text em{color:var(--red-light);font-style:normal;}
+.mission-glass-text strong{color:#4ade80;}
+
+/* ─── LEADERSHIP ─── */
+.leadership-section{
+  background:#0b0b0b;position:relative;overflow:hidden;
+}
+.leadership-section::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 70% 50%,rgba(13,107,46,0.07) 0%,transparent 55%);
+}
+.leadership-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5px;margin-top:3.5rem;
+  border:1.5px solid rgba(255,255,255,0.06);
+  border-radius:6px;overflow:hidden;
+}
+.leader-card{
+  position:relative;overflow:hidden;cursor:none;
+  background:rgba(255,255,255,0.025);
+  padding:2.5rem 2rem;transition:all 0.3s;
+}
+.leader-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transition:transform 0.35s;transform-origin:left;
+}
+.leader-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.04) 0%,transparent 50%);
+  opacity:0;transition:opacity 0.35s;
+}
+.leader-card:hover::before{transform:scaleX(1);}
+.leader-card:hover::after{opacity:1;}
+.leader-card:hover{background:rgba(255,255,255,0.055);}
+.leader-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(192,18,42,0.28),rgba(13,107,46,0.28));
+  border:1.5px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;
+  margin-bottom:1.3rem;transition:border-color 0.3s,box-shadow 0.3s;
+}
+.leader-card:hover .leader-avatar{
+  border-color:rgba(192,18,42,0.55);
+  box-shadow:0 0 20px rgba(192,18,42,0.2);
+}
+.leader-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.05em;color:#fff;text-transform:uppercase;}
+.leader-role{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--red-light);margin:0.3rem 0 0.9rem;}
+.leader-bio{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(255,255,255,0.4);line-height:1.65;}
+
+/* ─── VALUES ─── */
+.values-section{
+  background:var(--offwhite);position:relative;
+}
+.values-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(192,18,42,0.04) 0%,transparent 50%);
+}
+.values-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1.5px;margin-top:3.5rem;
+  background:rgba(0,0,0,0.08);border-radius:6px;overflow:hidden;
+}
+.value-card{
+  background:var(--offwhite);padding:2.5rem 1.8rem;
+  transition:all 0.3s;cursor:none;position:relative;overflow:hidden;
+}
+.value-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transition:transform 0.38s;transform-origin:left;
+}
+.value-card:hover::after{transform:scaleX(1);}
+.value-card:hover{background:#fff;transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.08);}
+.value-icon{font-size:2.2rem;margin-bottom:1.2rem;display:block;transition:transform 0.25s;}
+.value-card:hover .value-icon{transform:scale(1.14);}
+.value-num{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.2em;color:rgba(0,0,0,0.15);margin-bottom:0.3rem;}
+.value-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.07em;text-transform:uppercase;color:#0a0a0a;margin-bottom:0.6rem;}
+.value-text{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(0,0,0,0.48);line-height:1.65;}
+
+/* ─── CERTIFICATIONS — GLASSMORPHISM ─── */
+.cert-section{
+  position:relative;padding:7rem 2.5rem;overflow:hidden;
+}
+.cert-bg{
+  position:absolute;inset:0;
+  background-image:url('./assets/baseline.png');
+  background-size:cover;background-position:center;
+  filter:brightness(0.22) saturate(0.5);
+}
+.cert-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    140deg,
+    rgba(8,8,8,0.92) 0%,
+    rgba(13,107,46,0.14) 45%,
+    rgba(192,18,42,0.14) 75%,
+    rgba(8,8,8,0.85) 100%
+  );
+}
+.cert-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3.5rem;}
+
+.cert-glass{
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:2.5rem;
+  position:relative;overflow:hidden;
+  transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);cursor:none;
+}
+.cert-glass::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  opacity:0;transition:opacity 0.35s;
+}
+.cert-glass::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.35s;
+}
+.cert-glass:hover::before{opacity:1;}
+.cert-glass:hover::after{opacity:1;}
+.cert-glass:hover{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(255,255,255,0.18);
+  transform:translateY(-6px);
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+}
+.cert-level{
+  font-family:'Bebas Neue',sans-serif;font-size:5rem;
+  color:var(--red-light);line-height:1;margin-bottom:0.3rem;
+}
+.cert-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,255,255,0.32);margin-bottom:1rem;
+}
+.cert-desc{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.88rem;
+  color:rgba(255,255,255,0.48);line-height:1.65;
+}
+.cert-badges{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.4rem;}
+.cert-badge{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  padding:0.3rem 0.8rem;border-radius:2px;
+  border:1px solid rgba(255,255,255,0.14);
+  color:rgba(255,255,255,0.48);background:rgba(255,255,255,0.04);
+}
+.cert-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.2rem;}
+.cert-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#fff;line-height:1;}
+.cert-stat-num.g{color:#4ade80;}
+.cert-stat-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+
+/* ─── SAFETY STATS ─── */
+.safety-section{
+  background:var(--offwhite);position:relative;overflow:hidden;
+}
+.safety-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 100% 50%,rgba(192,18,42,0.04) 0%,transparent 50%);
+}
+.safety-layout{
+  display:grid;grid-template-columns:5fr 4fr;
+  gap:4.5rem;align-items:center;position:relative;z-index:2;
+}
+.safety-stats{display:flex;flex-direction:column;gap:1.8rem;margin-top:2.5rem;}
+.safety-row{
+  display:flex;align-items:center;gap:1.5rem;
+  padding-bottom:1.8rem;border-bottom:1px solid rgba(0,0,0,0.07);
+}
+.safety-row:last-child{border-bottom:none;padding-bottom:0;}
+.safety-bar-wrap{flex:1;}
+.safety-bar-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(0,0,0,0.4);margin-bottom:0.5rem;
+  display:flex;justify-content:space-between;
+}
+.safety-bar-label span{font-weight:700;color:#0a0a0a;}
+.safety-bar-track{height:4px;background:rgba(0,0,0,0.08);border-radius:2px;overflow:hidden;}
+.safety-bar-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  width:0;transition:width 1.3s cubic-bezier(0.22,1,0.36,1) 0.3s;
+}
+.safety-stat-big{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;min-width:62px;text-align:right;}
+
+/* Safety image panel */
+.safety-visual{
+  position:relative;height:460px;border-radius:8px;overflow:hidden;
+}
+.safety-img{
+  width:100%;height:100%;
+  background-image:url('./assets/baseline.png');
+  background-size:cover;background-position:center;
+  filter:brightness(0.65) saturate(0.75);transition:filter 0.4s;
+}
+.safety-visual:hover .safety-img{filter:brightness(0.75) saturate(0.9);}
+.safety-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.2) 0%,transparent 55%);
+}
+
+/* Zero badge */
+.zero-badge-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.zero-circle{
+  width:170px;height:170px;border-radius:50%;
+  background:rgba(8,8,8,0.7);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:2px solid rgba(192,18,42,0.45);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:all 0.35s;
+}
+.safety-visual:hover .zero-circle{
+  border-color:var(--red-light);
+  box-shadow:0 0 50px rgba(192,18,42,0.35);
+}
+.zero-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;}
+.zero-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center;margin-top:0.2rem;}
+
+/* ─── CLIENTS ─── */
+.clients-section{
+  background:var(--black);padding:4.5rem 2.5rem;
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.clients-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);text-align:center;margin-bottom:2.5rem;
+}
+.clients-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;max-width:960px;margin:0 auto;}
+.client-chip{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.75rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.7rem 1.6rem;border-radius:2px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.38);cursor:none;
+  transition:all 0.25s;white-space:nowrap;
+}
+.client-chip:hover{
+  background:rgba(192,18,42,0.08);border-color:rgba(192,18,42,0.4);
+  color:rgba(255,255,255,0.85);transform:translateY(-2px);
+}
+
+/* ─── CTA ─── */
+.cta-section{
+  background:linear-gradient(160deg,#090909 0%,#130407 60%,#070f07 100%);
+  padding:6rem 2.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 100%,rgba(192,18,42,0.1) 0%,transparent 55%);
+}
+.cta-glass-strip{
+  display:flex;max-width:680px;margin:2.5rem auto 0;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;
+}
+.cta-cell{
+  flex:1;padding:1.5rem 1.4rem;
+  border-right:1px solid rgba(255,255,255,0.07);
+  font-family:'Barlow Condensed',sans-serif;
+  display:flex;flex-direction:column;gap:0.35rem;
+}
+.cta-cell:last-child{border-right:none;}
+.cta-cell span{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.cta-cell strong{font-size:0.85rem;letter-spacing:0.08em;color:rgba(255,255,255,0.78);}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;position:relative;z-index:2;}
+
+.btn-primary{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:1rem 2.4rem;border:none;cursor:none;border-radius:2px;
+  background:linear-gradient(135deg,var(--red),var(--red-light));
+  color:#fff;position:relative;overflow:hidden;
+  transition:all 0.3s;box-shadow:0 4px 24px rgba(192,18,42,0.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+  transition:left 0.5s;
+}
+.btn-primary:hover::after{left:100%;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(192,18,42,0.6);}
+.btn-outline{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:1rem 2.4rem;cursor:none;border-radius:2px;
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.2);color:#fff;
+  text-decoration:none;display:inline-block;transition:all 0.3s;
+}
+.btn-outline:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.45);transform:translateY(-2px);}
+
+/* ─── FOOTER ─── */
+footer{background:#060606;padding:3.5rem 2.5rem 2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-inner{max-width:1280px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;background:linear-gradient(90deg,#fff,rgba(255,255,255,0.35));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.8rem;}
+.footer-tagline{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(255,255,255,0.28);line-height:1.7;}
+.footer-dots{display:flex;gap:0.35rem;margin-top:1.2rem;}
+.footer-dot{width:7px;height:7px;border-radius:50%;}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:1rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.footer-links a{font-family:'Barlow',sans-serif;font-size:0.83rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.82);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.footer-sub-links{display:flex;gap:1.5rem;}
+.footer-sub-links a{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.18);text-decoration:none;transition:color 0.2s;}
+.footer-sub-links a:hover{color:rgba(255,255,255,0.6);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fa{opacity:0;animation:fadeUp 0.75s ease forwards;}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.25s}.d3{animation-delay:0.4s}.d4{animation-delay:0.55s}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .story-layout{grid-template-columns:1fr;gap:3rem;}
+  .story-right{position:static;}
+  .story-img-wrap{height:380px;}
+  .story-badge-1{left:1rem;bottom:1rem;}
+  .story-badge-2{right:1rem;top:1rem;}
+  .safety-layout{grid-template-columns:1fr;gap:3rem;}
+  .safety-visual{height:360px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:900px){
+  .leadership-grid{grid-template-columns:1fr 1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .cert-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 1.2rem;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  section{padding:4.5rem 1.2rem;}
+  .cert-section{padding:4.5rem 1.2rem;}
+  .clients-section{padding:4rem 1.2rem;}
+  .leadership-grid{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .hero-content{padding:0 1.2rem 4rem;}
+  .scroll-vert{display:none;}
+  .cta-glass-strip{flex-direction:column;}
+  .cta-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .cta-cell:last-child{border-bottom:none;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .story-badge-1,.story-badge-2{display:none;}
+}
+@media(max-width:480px){
+  .values-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:4.5rem;}
+  .hero{height:80vh;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">LOROPO</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="nav-cta">Download Profile ↓</button>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-breadcrumb fa d1">
+      Home <span>/</span> About Us
+    </div>
+    <h1 class="hero-title fa d2">
+      WHO <span class="t-red">WE</span><br>
+      <span class="t-green">ARE</span>
+    </h1>
+    <p class="hero-sub fa d3">
+      A 100% black-owned mining services powerhouse forged in the Northern Cape. 14 years of results. One unbreakable standard.
+    </p>
+  </div>
+
+  <div class="scroll-vert fa d4">
+    <span>Scroll</span>
+    <div class="scroll-vert-line"></div>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ STORY / TIMELINE ═══════════════════ -->
+<section class="story-section">
+  <div class="s-inner">
+    <div class="story-blob"></div>
+    <div class="story-layout">
+
+      <!-- LEFT — timeline -->
+      <div>
+        <div class="reveal">
+          <p class="s-tag" style="color:var(--red-light)"><span class="dot" style="background:var(--red-light)"></span> Our Journey</p>
+          <h2 class="s-title" style="color:#fff;">14 YEARS.<br><span class="t-red">ONE</span><br>MISSION.</h2>
+          <p style="font-family:'Barlow';font-weight:300;font-size:1rem;color:rgba(255,255,255,0.45);line-height:1.75;margin-top:1.3rem;max-width:440px;">From a single contract in Kathu to a R2.4 billion pipeline, Loropo has grown by doing one thing consistently — showing up and delivering.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item reveal" style="transition-delay:0.05s">
+            <div class="tl-year">2008</div>
+            <div>
+              <div class="tl-title">Founded — Kathu, Northern Cape</div>
+              <div class="tl-text">Loropo Industries established as a 100% black-owned enterprise, winning its first contract for earthworks and civil support at an iron ore operation near Sishen.</div>
+              <span class="tl-tag r">Founding Year</span>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:0.1s">
+            <div class="tl-year">2012</div>
+            <div>
+              <div class="tl-title">First Major Kumba Contract</div>
+              <div class="tl-text">Secured materials handling and waste removal at Kumba Iron Ore's Sishen operation — the beginning of a long-term client relationship that continues today.</div>
+              <span class="tl-tag g">Milestone</span>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:0.15s">
+            <div class="tl-year">2016</div>
+            <div>
+              <div class="tl-title">ISO 45001 &amp; 1M LTI-Free Hours</div>
+              <div class="tl-text">Achieved international safety certification and crossed the 1 million LTI-free hours milestone across all active operations in the Northern Cape basin.</div>
+              <span class="tl-tag r">Safety Landmark</span>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:0.2s">
+            <div class="tl-year">2020</div>
+            <div>
+              <div class="tl-title">Level 1 B-BBEE &amp; Workforce Expansion</div>
+              <div class="tl-text">Attained Level 1 B-BBEE contributor status and grew the workforce to 650 employees, with 43% women in management roles — genuine transformation.</div>
+              <span class="tl-tag g">B-BBEE Level 1</span>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:0.25s">
+            <div class="tl-year">2025</div>
+            <div>
+              <div class="tl-title">Best Safety Performer — Kumba Awards</div>
+              <div class="tl-text">Recognised by Kumba Iron Ore as the best-performing contractor for safety across all Sishen operations. 5 million LTI-free hours achieved. Zero fatalities, all time.</div>
+              <span class="tl-tag r">Award</span>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:0.3s">
+            <div class="tl-year">2026</div>
+            <div>
+              <div class="tl-title">R2.4B Pipeline · 20 Active Contracts</div>
+              <div class="tl-text">Loropo enters 2026 with a R2.4 billion project pipeline, 20 active contracts, and integrated capabilities spanning maintenance, auctioneering, and heavy logistics.</div>
+              <span class="tl-tag g">Today</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — sticky image + mission -->
+      <div class="story-right reveal-right" style="transition-delay:0.15s">
+        <div class="story-img-wrap">
+          <div class="story-img"></div>
+          <div class="story-img-gloss"></div>
+          <div class="story-badge-1">
+            <div class="story-badge-1-num">14+</div>
+            <div class="story-badge-1-label">Years of<br>Proven Delivery</div>
+          </div>
+          <div class="story-badge-2">
+            <div class="story-badge-2-num">650</div>
+            <div class="story-badge-2-label">Strong<br>Workforce</div>
+          </div>
+        </div>
+        <div class="mission-glass">
+          <div class="mission-glass-label">Our Mission</div>
+          <p class="mission-glass-text">"To deliver integrated mining support services with <em>zero harm</em>, <strong>maximum impact</strong>, and an unwavering commitment to transformation."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ LEADERSHIP ═══════════════════ -->
+<section class="leadership-section">
+  <div class="s-inner" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <p class="s-tag" style="color:rgba(255,255,255,0.35)"><span class="dot" style="background:var(--red-light)"></span> The People</p>
+      <h2 class="s-title" style="color:#fff;">LEADERSHIP<br><span class="t-green">TEAM</span></h2>
+    </div>
+    <div class="leadership-grid">
+      <div class="leader-card reveal" style="transition-delay:0.05s">
+        <div class="leader-avatar">TM</div>
+        <div class="leader-name">Thabiso Molefe</div>
+        <div class="leader-role">Chief Executive Officer</div>
+        <p class="leader-bio">Co-founder with 20+ years in mining services. Drives Loropo's strategic direction, client relationships, and transformation agenda across the Northern Cape basin.</p>
+      </div>
+      <div class="leader-card reveal" style="transition-delay:0.12s">
+        <div class="leader-avatar" style="background:linear-gradient(135deg,rgba(13,107,46,0.38),rgba(192,18,42,0.18))">NK</div>
+        <div class="leader-name">Nomsa Khumalo</div>
+        <div class="leader-role">Chief Operating Officer</div>
+        <p class="leader-bio">Operations expert managing 20 simultaneous contracts. Responsible for daily execution, health &amp; safety systems, and workforce development programmes.</p>
+      </div>
+      <div class="leader-card reveal" style="transition-delay:0.22s">
+        <div class="leader-avatar" style="background:linear-gradient(135deg,rgba(192,18,42,0.18),rgba(13,107,46,0.38))">SP</div>
+        <div class="leader-name">Sipho Petersen</div>
+        <div class="leader-role">Technical Director</div>
+        <p class="leader-bio">Leads all plant maintenance, shaft sinking, and equipment divisions. Engineer with 18 years' experience on iron ore and manganese operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VALUES ═══════════════════ -->
+<section class="values-section">
+  <div class="s-inner" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <p class="s-tag" style="color:var(--red)"><span class="dot" style="background:var(--red)"></span> What Drives Us</p>
+      <h2 class="s-title" style="color:#0a0a0a;">OUR<br><span class="t-red">CORE</span> VALUES</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal" style="transition-delay:0.05s">
+        <span class="value-icon">⛑️</span>
+        <div class="value-num">01</div>
+        <div class="value-title">Zero Harm</div>
+        <p class="value-text">Safety is not a department. It is the lens through which every decision is made, every tool inspected, every shift started across all 20 contracts.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.1s">
+        <span class="value-icon">🤝</span>
+        <div class="value-num">02</div>
+        <div class="value-title">Transformation</div>
+        <p class="value-text">Genuine empowerment. 100% black ownership, meaningful employment equity, and skills development baked into every contract we sign.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.15s">
+        <span class="value-icon">⚙️</span>
+        <div class="value-num">03</div>
+        <div class="value-title">Execution</div>
+        <p class="value-text">We mobilise fast, deliver consistently, and measure ourselves against the toughest production and quality benchmarks in the Northern Cape basin.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.2s">
+        <span class="value-icon">🌍</span>
+        <div class="value-num">04</div>
+        <div class="value-title">Community</div>
+        <p class="value-text">We employ from the communities where we operate, invest in local skills, and build lasting social value alongside commercial performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ CERTIFICATIONS — GLASS ═══════════════════ -->
+<section class="cert-section">
+  <div class="cert-bg"></div>
+  <div class="cert-overlay"></div>
+  <div class="cert-inner">
+    <div class="reveal">
+      <p class="s-tag" style="color:rgba(255,255,255,0.38)"><span class="dot" style="background:var(--green-light)"></span> Credentials</p>
+      <h2 class="s-title" style="color:#fff;">CERTIFIED.<br><span class="t-red">VERIFIED.</span><br><span class="t-green">TRUSTED.</span></h2>
+    </div>
+    <div class="cert-grid">
+      <!-- B-BBEE Glass Card -->
+      <div class="cert-glass reveal" style="transition-delay:0.1s">
+        <div class="cert-level">L1</div>
+        <div class="cert-label">B-BBEE Contributor Level — 2026 Verified</div>
+        <p class="cert-desc">Loropo holds a Level 1 B-BBEE rating independently verified for 2026. 100% black ownership with meaningful skills development, preferential procurement, and enterprise development contributions throughout the supply chain.</p>
+        <div class="cert-badges">
+          <span class="cert-badge">100% Black Owned</span>
+          <span class="cert-badge">Verified 2026</span>
+          <span class="cert-badge">Skills Dev Active</span>
+          <span class="cert-badge">Transformation Leader</span>
+        </div>
+      </div>
+      <!-- Safety Glass Card -->
+      <div class="cert-glass reveal" style="transition-delay:0.22s">
+        <div style="font-family:'Bebas Neue';font-size:1.4rem;color:rgba(255,255,255,0.28);letter-spacing:0.12em;margin-bottom:0.5rem;">Safety &amp; Compliance</div>
+        <div class="cert-stat-grid">
+          <div>
+            <div class="cert-stat-num">5M+</div>
+            <div class="cert-stat-label">LTI-Free Hours</div>
+          </div>
+          <div>
+            <div class="cert-stat-num g">ISO</div>
+            <div class="cert-stat-label">45001 Certified</div>
+          </div>
+          <div>
+            <div class="cert-stat-num">JQS</div>
+            <div class="cert-stat-label">Qualified Vendor</div>
+          </div>
+          <div>
+            <div class="cert-stat-num g">DMR</div>
+            <div class="cert-stat-label">Registered</div>
+          </div>
+        </div>
+        <div class="cert-badges" style="margin-top:1.5rem;">
+          <span class="cert-badge">Best Safety Performer · Kumba 2025</span>
+          <span class="cert-badge">Zero Fatalities</span>
+          <span class="cert-badge">COP Compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SAFETY STATS ═══════════════════ -->
+<section class="safety-section">
+  <div class="s-inner">
+    <div class="safety-layout">
+      <!-- Stats left -->
+      <div>
+        <div class="reveal">
+          <p class="s-tag" style="color:var(--red)"><span class="dot" style="background:var(--red)"></span> Safety Performance</p>
+          <h2 class="s-title" style="color:#0a0a0a;">SAFETY<br>IS OUR<br><span class="t-green">BASELINE</span></h2>
+          <p style="font-family:'Barlow';font-weight:300;font-size:0.95rem;color:rgba(0,0,0,0.46);line-height:1.75;margin-top:1.2rem;max-width:380px;">We don't celebrate safety. We expect it. These numbers reflect a culture — not a campaign.</p>
+        </div>
+        <div class="safety-stats reveal" style="transition-delay:0.1s">
+          <div class="safety-row">
+            <div class="safety-bar-wrap">
+              <div class="safety-bar-label">Availability Rate <span>98%</span></div>
+              <div class="safety-bar-track"><div class="safety-bar-fill" data-w="98"></div></div>
+            </div>
+            <div class="safety-stat-big" style="color:var(--red)">98%</div>
+          </div>
+          <div class="safety-row">
+            <div class="safety-bar-wrap">
+              <div class="safety-bar-label">Women in Management <span>43%</span></div>
+              <div class="safety-bar-track"><div class="safety-bar-fill" data-w="43"></div></div>
+            </div>
+            <div class="safety-stat-big" style="color:var(--green-light)">43%</div>
+          </div>
+          <div class="safety-row">
+            <div class="safety-bar-wrap">
+              <div class="safety-bar-label">Local Employment <span>82%</span></div>
+              <div class="safety-bar-track"><div class="safety-bar-fill" data-w="82"></div></div>
+            </div>
+            <div class="safety-stat-big">82%</div>
+          </div>
+          <div class="safety-row">
+            <div class="safety-bar-wrap">
+              <div class="safety-bar-label">Client Retention <span>94%</span></div>
+              <div class="safety-bar-track"><div class="safety-bar-fill" data-w="94"></div></div>
+            </div>
+            <div class="safety-stat-big" style="color:var(--red)">94%</div>
+          </div>
+        </div>
+      </div>
+      <!-- Visual right -->
+      <div class="safety-visual reveal-right" style="transition-delay:0.2s">
+        <div class="safety-img"></div>
+        <div class="safety-img-overlay"></div>
+        <div class="zero-badge-wrap">
+          <div class="zero-circle">
+            <div class="zero-num">0</div>
+            <div class="zero-label">Fatalities<br>All Time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CLIENTS ═══════════════════ -->
+<div class="clients-section">
+  <p class="clients-label">Our Clients &amp; Partners Across the Northern Cape Basin</p>
+  <div class="clients-strip">
+    <div class="client-chip">Kumba Iron Ore · Sishen</div>
+    <div class="client-chip">Anglo American / Kolomela</div>
+    <div class="client-chip">Black Mountain Mining</div>
+    <div class="client-chip">Sedibeng · Hotazel</div>
+    <div class="client-chip">Assmang Manganese</div>
+    <div class="client-chip">Exxaro Resources</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section">
+  <div style="position:relative;z-index:2;">
+    <p class="s-tag" style="color:rgba(255,255,255,0.28);justify-content:center;margin-bottom:0.8rem;"><span class="dot" style="background:var(--red)"></span> Work With Us</p>
+    <h2 class="s-title" style="color:#fff;">PARTNER<br><span class="t-red">WITH</span> LOROPO</h2>
+    <p style="font-family:'Barlow';font-weight:300;color:rgba(255,255,255,0.38);max-width:400px;margin:1rem auto;line-height:1.7;font-size:0.93rem;">Whether you're a mining house, contractor, or supplier — we're ready to mobilise on your next project within 48 hours.</p>
+    <div class="cta-glass-strip reveal">
+      <div class="cta-cell"><span>Location</span><strong>📍 Kathu, Northern Cape</strong></div>
+      <div class="cta-cell"><span>Direct Line</span><strong>📞 +27 (0)53 712 3456</strong></div>
+      <div class="cta-cell"><span>Email</span><strong>✉️ info@loropo.co.za</strong></div>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-primary">Request a Proposal</button>
+      <a href="#" class="btn-outline">Download 2026 Profile ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">LOROPO INDUSTRIES</div>
+        <p class="footer-tagline">Integrated mining support services across the Northern Cape basin. Est. 2008. Built to last.</p>
+        <div class="footer-dots">
+          <div class="footer-dot" style="background:var(--red)"></div>
+          <div class="footer-dot" style="background:var(--green-light)"></div>
+          <div class="footer-dot" style="background:rgba(255,255,255,0.18)"></div>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Plant Maintenance</a></li>
+          <li><a href="#">Equipment Repair</a></li>
+          <li><a href="#">Auctioneering</a></li>
+          <li><a href="#">Heavy Logistics</a></li>
+          <li><a href="#">Shaft Sinking</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">B-BBEE Certificate</a></li>
+          <li><a href="#">Safety Record</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Loropo Industries Pty Ltd · All Rights Reserved</span>
+      <div class="footer-sub-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">B-BBEE Cert</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── CURSOR ─── */
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function loop(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.leader-card,.value-card,.cert-glass,.client-chip,.tl-item,.safety-visual').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('hovered'));
+});
+
+/* ─── HERO BG ─── */
+setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),80);
+
+/* ─── MOBILE NAV ─── */
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
+
+/* ─── SCROLL REVEAL ─── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(r=>obs.observe(r));
+
+/* ─── ANIMATED BARS ─── */
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.safety-bar-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+      barObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+const safetyStats=document.querySelector('.safety-stats');
+if(safetyStats) barObs.observe(safetyStats);
+
+/* ─── NAV SCROLL ─── */
+const nav=document.getElementById('mainNav');
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  if(heroBg) heroBg.style.transform=`translateY(${window.scrollY*0.3}px)`;
+});
+</script>
+</body>
+</html>

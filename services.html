@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loropo Industries · Services · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,800;1,300&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0122a;
+  --red-light: #e8192f;
+  --red-glow: rgba(192,18,42,0.4);
+  --green: #0d6b2e;
+  --green-light: #16a34a;
+  --green-glow: rgba(13,107,46,0.35);
+  --black: #080808;
+  --offwhite: #f2f0eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Barlow',sans-serif;
+  background:var(--black);
+  color:#fff;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── NOISE ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ─── CURSOR ─── */
+#cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;
+  background:var(--red-light);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:background 0.2s,transform 0.15s;
+}
+#cursor.hovered{transform:scale(2.5)!important;background:var(--green-light);}
+#cursor-ring{
+  position:fixed;top:0;left:0;width:32px;height:32px;
+  border:1.5px solid rgba(192,18,42,0.55);border-radius:50%;
+  pointer-events:none;z-index:9998;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:70px;padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.45);
+  backdrop-filter:blur(24px) saturate(1.5);
+  -webkit-backdrop-filter:blur(24px) saturate(1.5);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  transition:background 0.4s;
+}
+nav.scrolled{background:rgba(8,8,8,0.9);}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:0.1em;
+  background:linear-gradient(100deg,#fff 0%,var(--red-light) 45%,var(--green-light) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:2.4rem;list-style:none;}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.75rem;
+  letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.6);
+  text-decoration:none;position:relative;transition:color 0.2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-5px;left:0;width:0;height:1.5px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));transition:width 0.3s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:0.55rem 1.5rem;border:1px solid var(--red);border-radius:2px;
+  background:linear-gradient(135deg,var(--red),#d01428);
+  color:#fff;cursor:none;transition:all 0.25s;
+  box-shadow:0 0 18px rgba(192,18,42,0.3);
+}
+.nav-cta:hover{box-shadow:0 0 32px rgba(192,18,42,0.55);transform:scale(1.04);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;}
+
+/* ─── MOBILE NAV ─── */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:190;
+  background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Bebas Neue';font-size:3.5rem;color:#fff;text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--red-light);}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:2rem;cursor:none;line-height:1;}
+
+/* ─── STRIPE ─── */
+.stripe{
+  height:3px;
+  background:repeating-linear-gradient(90deg,var(--red) 0%,var(--red) 33.3%,var(--green-light) 33.3%,var(--green-light) 66.6%,#1a1a1a 66.6%,#1a1a1a 100%);
+}
+
+/* ─── SHARED ─── */
+section{padding:7rem 2.5rem;}
+.s-inner{max-width:1280px;margin:0 auto;}
+.s-tag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;
+  letter-spacing:0.32em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:0.6rem;margin-bottom:1rem;
+}
+.s-tag .dot{width:5px;height:5px;border-radius:50%;}
+.s-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);line-height:0.93;letter-spacing:0.02em;}
+.t-red{background:linear-gradient(135deg,var(--red-light),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.t-green{background:linear-gradient(135deg,var(--green-light),#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('./assets/hero3.png');
+  background-size:cover;background-position:center 35%;
+  filter:brightness(0.3) saturate(0.6);
+  transform:scale(1.05);transition:transform 0.6s ease;
+}
+.hero-bg.loaded{transform:scale(1);}
+.hero-ov1{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(8,8,8,0.25) 0%,rgba(8,8,8,0.58) 45%,rgba(8,8,8,0.97) 100%);
+}
+.hero-ov2{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(90deg,rgba(192,18,42,0.1) 0%,transparent 35%,transparent 65%,rgba(13,107,46,0.1) 100%);
+}
+.hero-blob{position:absolute;z-index:2;border-radius:50%;pointer-events:none;}
+.hero-blob-1{
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(192,18,42,0.14) 0%,transparent 70%);
+  top:-300px;left:-250px;
+  animation:b1 14s ease-in-out infinite;
+}
+.hero-blob-2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(13,107,46,0.14) 0%,transparent 70%);
+  bottom:-200px;right:-150px;
+  animation:b2 12s ease-in-out infinite;
+}
+@keyframes b1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes b2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-40px)}}
+
+.hero-content{
+  position:relative;z-index:4;
+  width:100%;max-width:1280px;margin:0 auto;
+  padding:0 2.5rem 5rem;
+}
+.hero-breadcrumb{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;
+}
+.hero-breadcrumb span{color:var(--red-light);}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,13vw,11rem);
+  line-height:0.88;letter-spacing:0.01em;color:#fff;
+}
+.hero-sub{
+  font-size:clamp(0.9rem,1.5vw,1.1rem);font-weight:300;
+  color:rgba(255,255,255,0.5);max-width:540px;
+  line-height:1.75;margin-top:1.3rem;
+}
+
+/* Glass hero stats strip */
+.hero-stats-strip{
+  display:flex;gap:0;margin-top:2.5rem;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:6px;
+  overflow:hidden;max-width:680px;
+}
+.hero-stat{
+  flex:1;padding:1.2rem 1.4rem;
+  border-right:1px solid rgba(255,255,255,0.07);
+  transition:background 0.25s;
+}
+.hero-stat:last-child{border-right:none;}
+.hero-stat:hover{background:rgba(255,255,255,0.08);}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;line-height:1;}
+.hero-stat-num.r{color:var(--red-light);}
+.hero-stat-num.g{color:#4ade80;}
+.hero-stat-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-top:0.15rem;}
+
+.scroll-vert{
+  position:absolute;right:3rem;bottom:3rem;z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+}
+.scroll-vert span{font-family:'Barlow Condensed';font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.28);writing-mode:vertical-rl;}
+.scroll-vert-line{width:1px;height:56px;background:linear-gradient(to bottom,rgba(255,255,255,0.4),transparent);animation:vPulse 2s ease infinite;}
+@keyframes vPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* ─── SERVICE CARDS SECTION ─── */
+.services-section{
+  background:#0b0b0b;position:relative;overflow:hidden;
+}
+.services-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 0%,rgba(192,18,42,0.06) 0%,transparent 55%);
+}
+
+/* Filter bar */
+.filter-bar{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:2rem;margin-bottom:3rem;}
+.filter-btn{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.55rem 1.3rem;border-radius:2px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.03);
+  color:rgba(255,255,255,0.4);cursor:none;transition:all 0.22s;
+  backdrop-filter:blur(8px);
+}
+.filter-btn:hover{border-color:var(--red);color:var(--red-light);background:rgba(192,18,42,0.06);}
+.filter-btn.active{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 0 16px rgba(192,18,42,0.35);}
+
+/* Cards grid */
+.svc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5px;background:rgba(255,255,255,0.05);
+  border-radius:6px;overflow:hidden;
+}
+
+/* ─── SERVICE CARD ─── */
+.svc-card{
+  position:relative;overflow:hidden;cursor:none;
+  background:#111;min-height:440px;
+  display:flex;flex-direction:column;
+  transition:all 0.3s;
+}
+
+.svc-card-top{position:relative;height:230px;overflow:hidden;flex-shrink:0;}
+.svc-card-img{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:brightness(0.42) saturate(0.6);
+  transition:filter 0.5s,transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.svc-card:hover .svc-card-img{filter:brightness(0.35) saturate(0.8);transform:scale(1.08);}
+.svc-card-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 20%,rgba(8,8,8,0.92) 100%);
+  transition:background 0.4s;
+}
+.svc-card:hover .svc-card-img-overlay{
+  background:linear-gradient(to bottom,rgba(192,18,42,0.06) 0%,rgba(8,8,8,0.96) 100%);
+}
+.svc-card-num{
+  position:absolute;top:1.2rem;left:1.5rem;
+  font-family:'Bebas Neue',sans-serif;font-size:4rem;
+  color:rgba(255,255,255,0.07);line-height:1;
+  transition:color 0.3s;
+}
+.svc-card:hover .svc-card-num{color:rgba(255,255,255,0.12);}
+.svc-card-icon{
+  position:absolute;bottom:1.2rem;left:1.5rem;font-size:1.8rem;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+/* Glass badge top right */
+.svc-badge{
+  position:absolute;top:1rem;right:1rem;
+  background:rgba(8,8,8,0.6);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:3px;
+  padding:0.3rem 0.7rem;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);
+}
+
+.svc-card-body{
+  padding:1.6rem 1.8rem;flex:1;display:flex;flex-direction:column;
+  position:relative;
+}
+.svc-card-body::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transition:transform 0.38s;transform-origin:left;
+}
+.svc-card:hover .svc-card-body::before{transform:scaleX(1);}
+.svc-card-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:0.45rem;
+}
+.svc-card-label.g{color:#4ade80;}
+.svc-card-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.65rem;
+  line-height:1;color:#fff;margin-bottom:0.7rem;
+}
+.svc-card-desc{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;
+  color:rgba(255,255,255,0.42);line-height:1.65;flex:1;
+}
+.svc-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.2rem;}
+.svc-tag{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.28rem 0.7rem;border-radius:2px;
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.03);
+  transition:all 0.2s;cursor:none;
+}
+.svc-card:hover .svc-tag{border-color:rgba(192,18,42,0.3);color:var(--red-light);background:rgba(192,18,42,0.06);}
+.svc-arrow{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  margin-top:1.1rem;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--red-light);
+  opacity:0;transform:translateX(-8px);transition:all 0.32s;
+}
+.svc-arrow::after{content:'→';}
+.svc-card:hover .svc-arrow{opacity:1;transform:translateX(0);}
+
+/* Bottom accent line */
+.svc-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;z-index:4;
+}
+.svc-card:hover::after{transform:scaleX(1);}
+
+/* Image backgrounds */
+.img-maintenance{background-image:url('./assets/fixplant.png');}
+.img-equipment{background-image:url('./assets/miningequip.png');}
+.img-auction{background-image:url('./assets/auction.png');}
+.img-logistics{background-image:url('./assets/heavylogi.png');}
+.img-earthworks{background-image:url('./assets/footerhero.png');}
+.img-pm{background-image:url('./assets/project.png');}
+
+/* ─── FEATURED CONTRACT ─── */
+.featured-section{
+  background:linear-gradient(160deg,#0a0a0a 0%,#0d0508 50%,#080e08 100%);
+  position:relative;overflow:hidden;
+}
+.featured-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 80% 50%,rgba(13,107,46,0.06) 0%,transparent 50%);
+}
+
+.featured-card{
+  position:relative;overflow:hidden;border-radius:8px;
+  min-height:540px;cursor:none;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.featured-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1509390836518-75e0c56a7a89?w=1600&q=85');
+  background-size:cover;background-position:center;
+  filter:brightness(0.35) saturate(0.65);
+  transition:transform 0.6s ease;
+}
+.featured-card:hover .featured-bg{transform:scale(1.03);}
+.featured-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(8,8,8,0.95) 0%,rgba(8,8,8,0.65) 50%,rgba(13,107,46,0.12) 100%);
+}
+.featured-content{
+  position:relative;z-index:2;padding:3.5rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.featured-tag{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:0.7rem;
+}
+.featured-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  color:#fff;line-height:1.05;
+}
+.featured-body{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:0.88rem;
+  color:rgba(255,255,255,0.48);line-height:1.65;margin-top:0.9rem;
+  max-width:420px;
+}
+
+/* Glass KPI panel */
+.featured-kpis{
+  position:relative;z-index:2;padding:3rem 3rem 3rem 2rem;
+  display:flex;flex-direction:column;gap:1.2rem;justify-content:center;
+}
+.kpi-glass{
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(22px) saturate(1.4);
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:6px;padding:1.2rem 1.5rem;
+  transition:all 0.28s;position:relative;overflow:hidden;
+}
+.kpi-glass::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),var(--green-light));
+  opacity:0;transition:opacity 0.28s;
+}
+.kpi-glass:hover::before{opacity:1;}
+.kpi-glass:hover{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(255,255,255,0.18);
+  transform:translateX(5px);
+}
+.kpi-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#fff;line-height:1;}
+.kpi-num.r{color:var(--red-light);}
+.kpi-num.g{color:#4ade80;}
+.kpi-label{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.32);}
+
+/* ─── FLEET SECTION ─── */
+.fleet-section{
+  position:relative;padding:7rem 2.5rem;overflow:hidden;
+}
+.fleet-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=1600&q=80');
+  background-size:cover;background-position:center;
+  filter:brightness(0.18) saturate(0.5);
+}
+.fleet-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(8,8,8,0.92) 0%,
+    rgba(192,18,42,0.1) 40%,
+    rgba(13,107,46,0.12) 70%,
+    rgba(8,8,8,0.88) 100%
+  );
+}
+.fleet-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;}
+.fleet-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1.5px;margin-top:3.5rem;
+  border:1.5px solid rgba(255,255,255,0.06);
+  border-radius:6px;overflow:hidden;
+}
+.fleet-card{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:2rem 1.6rem;transition:all 0.3s;cursor:none;
+  position:relative;overflow:hidden;
+}
+.fleet-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--green-light));
+  transform:scaleX(0);transition:transform 0.35s;transform-origin:left;
+}
+.fleet-card:hover::after{transform:scaleX(1);}
+.fleet-card:hover{background:rgba(255,255,255,0.08);}
+.fleet-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.fleet-num{
+  font-family:'Bebas Neue',sans-serif;font-size:3.2rem;
+  color:#fff;line-height:1;transition:color 0.2s;
+}
+.fleet-card:hover .fleet-num{color:var(--red-light);}
+.fleet-label{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:0.3rem;}
+.fleet-detail{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.78rem;color:rgba(255,255,255,0.25);margin-top:0.5rem;line-height:1.55;}
+
+/* ─── DIFFERENTIATORS ─── */
+.diff-section{
+  background:var(--offwhite);position:relative;overflow:hidden;
+}
+.diff-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(192,18,42,0.04) 0%,transparent 55%);
+}
+.diff-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3.5rem;
+  position:relative;z-index:2;
+}
+.diff-card{
+  background:#fff;border-radius:6px;padding:2.2rem 2rem;
+  transition:all 0.32s;cursor:none;position:relative;overflow:hidden;
+  border:1px solid rgba(0,0,0,0.06);
+}
+.diff-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--red),var(--green-light));
+  transform:scaleY(0);transition:transform 0.38s;transform-origin:top;
+}
+.diff-card:hover::before{transform:scaleY(1);}
+.diff-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(0,0,0,0.1);}
+.diff-icon{font-size:2.2rem;margin-bottom:1.2rem;display:block;transition:transform 0.25s;}
+.diff-card:hover .diff-icon{transform:scale(1.12);}
+.diff-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.92rem;letter-spacing:0.07em;text-transform:uppercase;color:#0a0a0a;margin-bottom:0.5rem;}
+.diff-text{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(0,0,0,0.46);line-height:1.65;}
+.diff-pill{
+  display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.28rem 0.8rem;border-radius:2px;
+  border:1px solid rgba(192,18,42,0.3);color:var(--red);background:rgba(192,18,42,0.05);
+}
+.diff-pill.g{border-color:rgba(22,163,74,0.3);color:var(--green-light);background:rgba(22,163,74,0.05);}
+
+/* ─── EMERGENCY BANNER ─── */
+.emergency{
+  position:relative;overflow:hidden;padding:5rem 2.5rem;
+}
+.emergency-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80');
+  background-size:cover;background-position:center;
+  filter:brightness(0.18) saturate(0.5);
+}
+.emergency-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,18,42,0.88) 0%,rgba(8,8,8,0.96) 60%,rgba(13,107,46,0.28) 100%);
+}
+.emergency-inner{
+  position:relative;z-index:2;max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2.5rem;flex-wrap:wrap;
+}
+.emergency-left h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;line-height:0.95;
+}
+.emergency-left p{
+  font-family:'Barlow',sans-serif;font-weight:300;font-size:1rem;
+  color:rgba(255,255,255,0.55);margin-top:0.7rem;
+}
+.emergency-right{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;}
+.emergency-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#fff;letter-spacing:0.04em;line-height:1;}
+.emergency-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+
+/* Glass button */
+.btn-emergency{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  padding:0.9rem 2.2rem;border-radius:3px;
+  background:rgba(255,255,255,0.95);color:var(--red);
+  border:none;cursor:none;transition:all 0.25s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.btn-emergency:hover{background:#fff;transform:scale(1.04);box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+
+/* ─── CTA ─── */
+.cta-section{
+  background:linear-gradient(160deg,#090909 0%,#130407 60%,#070f07 100%);
+  padding:6rem 2.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 100%,rgba(192,18,42,0.1) 0%,transparent 55%);
+}
+.cta-glass-strip{
+  display:flex;max-width:680px;margin:2.5rem auto 0;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;
+}
+.cta-cell{
+  flex:1;padding:1.5rem 1.4rem;
+  border-right:1px solid rgba(255,255,255,0.07);
+  font-family:'Barlow Condensed',sans-serif;
+  display:flex;flex-direction:column;gap:0.35rem;
+}
+.cta-cell:last-child{border-right:none;}
+.cta-cell span{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.cta-cell strong{font-size:0.85rem;letter-spacing:0.08em;color:rgba(255,255,255,0.78);}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;position:relative;z-index:2;}
+
+.btn-primary{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:1rem 2.4rem;border:none;cursor:none;border-radius:2px;
+  background:linear-gradient(135deg,var(--red),var(--red-light));
+  color:#fff;position:relative;overflow:hidden;
+  transition:all 0.3s;box-shadow:0 4px 24px rgba(192,18,42,0.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+  transition:left 0.5s;
+}
+.btn-primary:hover::after{left:100%;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(192,18,42,0.6);}
+.btn-outline{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  padding:1rem 2.4rem;cursor:none;border-radius:2px;
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.2);color:#fff;
+  text-decoration:none;display:inline-block;transition:all 0.3s;
+}
+.btn-outline:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.45);transform:translateY(-2px);}
+
+/* ─── FOOTER ─── */
+footer{background:#060606;padding:3.5rem 2.5rem 2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-inner{max-width:1280px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;background:linear-gradient(90deg,#fff,rgba(255,255,255,0.35));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.8rem;}
+.footer-tagline{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.83rem;color:rgba(255,255,255,0.28);line-height:1.7;}
+.footer-dots{display:flex;gap:0.35rem;margin-top:1.2rem;}
+.footer-dot{width:7px;height:7px;border-radius:50%;}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:1rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.footer-links a{font-family:'Barlow',sans-serif;font-size:0.83rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.82);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.footer-sub-links{display:flex;gap:1.5rem;}
+.footer-sub-links a{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.18);text-decoration:none;transition:color 0.2s;}
+.footer-sub-links a:hover{color:rgba(255,255,255,0.6);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fa{opacity:0;animation:fadeUp 0.75s ease forwards;}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.25s}.d3{animation-delay:0.4s}.d4{animation-delay:0.55s}.d5{animation-delay:0.7s}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* card filter transition */
+.svc-card{transition:opacity 0.35s,transform 0.35s,all 0.3s;}
+.svc-card.dimmed{opacity:0.18;transform:scale(0.97);pointer-events:none;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .svc-grid{grid-template-columns:1fr 1fr;}
+  .featured-card{grid-template-columns:1fr;}
+  .featured-kpis{flex-direction:row;flex-wrap:wrap;padding:2rem 3rem;}
+  .kpi-glass{flex:1;min-width:120px;}
+  .fleet-grid{grid-template-columns:1fr 1fr;}
+  .diff-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 1.2rem;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  section{padding:4.5rem 1.2rem;}
+  .fleet-section,.emergency,.cta-section{padding:4.5rem 1.2rem;}
+  .svc-grid{grid-template-columns:1fr;}
+  .fleet-grid{grid-template-columns:1fr 1fr;}
+  .diff-grid{grid-template-columns:1fr;}
+  .hero-content{padding:0 1.2rem 4rem;}
+  .hero-stats-strip{flex-direction:column;}
+  .hero-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .hero-stat:last-child{border-bottom:none;}
+  .scroll-vert{display:none;}
+  .emergency-inner{flex-direction:column;align-items:flex-start;}
+  .emergency-right{align-items:flex-start;}
+  .cta-glass-strip{flex-direction:column;}
+  .cta-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .cta-cell:last-child{border-bottom:none;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+}
+@media(max-width:480px){
+  .hero-title{font-size:4.5rem;}
+  .hero{height:80vh;}
+  .fleet-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">LOROPO</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="nav-cta">Download Profile ↓</button>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-breadcrumb fa d1">Home <span>/</span> Services</div>
+    <h1 class="hero-title fa d2">
+      WHAT WE<br>
+      <span class="t-red">DE</span><span class="t-green">LIVER</span>
+    </h1>
+    <p class="hero-sub fa d3">Six integrated service lines. One partner. Covering maintenance, auctioneering, and heavy logistics across the Northern Cape mining basin.</p>
+
+    <!-- Glass stats strip -->
+    <div class="hero-stats-strip fa d4">
+      <div class="hero-stat">
+        <div class="hero-stat-num r">6</div>
+        <div class="hero-stat-label">Service Lines</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num g">20</div>
+        <div class="hero-stat-label">Active Contracts</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">50+</div>
+        <div class="hero-stat-label">Fleet Assets</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num r">2hr</div>
+        <div class="hero-stat-label">Mobilisation</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-vert fa d5">
+    <span>Scroll</span>
+    <div class="scroll-vert-line"></div>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ SERVICE CARDS ═══════════════════ -->
+<section class="services-section">
+  <div class="s-inner">
+    <div class="reveal">
+      <p class="s-tag" style="color:var(--red-light)"><span class="dot" style="background:var(--red-light)"></span> Our Capabilities</p>
+      <h2 class="s-title" style="color:#fff;">SIX LINES.<br><span class="t-red">ONE</span> PARTNER.</h2>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar reveal" style="transition-delay:0.1s">
+      <button class="filter-btn active" data-filter="all">All Services</button>
+      <button class="filter-btn" data-filter="maintenance">Maintenance</button>
+      <button class="filter-btn" data-filter="logistics">Logistics</button>
+      <button class="filter-btn" data-filter="auctioneering">Auctioneering</button>
+      <button class="filter-btn" data-filter="civil">Civil &amp; Earthworks</button>
+    </div>
+
+    <div class="svc-grid reveal" style="transition-delay:0.15s">
+
+      <!-- 01 FIXED PLANT MAINTENANCE -->
+      <div class="svc-card" data-category="maintenance">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-maintenance"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">01</div>
+          <div class="svc-badge">Core Service</div>
+          <div class="svc-card-icon">🔧</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label">Core · Maintenance</div>
+          <div class="svc-card-title">FIXED PLANT MAINTENANCE</div>
+          <p class="svc-card-desc">Crushing circuits, screening plants, conveyor systems, and mill relines. Planned, preventative, and emergency shutdown maintenance with ISO 45001-certified crews deployed across all Sishen-area operations.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Crusher Rebuilds</span>
+            <span class="svc-tag">Conveyor Belting</span>
+            <span class="svc-tag">Screen Decks</span>
+            <span class="svc-tag">Shutdown Maint.</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+      <!-- 02 EQUIPMENT MAINTENANCE -->
+      <div class="svc-card" data-category="maintenance">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-equipment"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">02</div>
+          <div class="svc-badge">Specialist</div>
+          <div class="svc-card-icon">⚙️</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label">Specialist · Maintenance</div>
+          <div class="svc-card-title">MINING EQUIPMENT MAINTENANCE</div>
+          <p class="svc-card-desc">Ultraclass fleet servicing, haul truck maintenance, shovel component changes, and shaft equipping. In-field and workshop-based teams mobilised within 2 hours anywhere in the Kathu corridor.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">CAT &amp; Komatsu</span>
+            <span class="svc-tag">Ultraclass Fleet</span>
+            <span class="svc-tag">Rope Changes</span>
+            <span class="svc-tag">Winder Service</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+      <!-- 03 AUCTIONEERING -->
+      <div class="svc-card" data-category="auctioneering">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-auction"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">03</div>
+          <div class="svc-badge">Specialist</div>
+          <div class="svc-card-icon">🔨</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label g">Specialist · Auctioneering</div>
+          <div class="svc-card-title">AUCTIONEERING SERVICES</div>
+          <p class="svc-card-desc">End-to-end asset disposal, independent valuation, and live auction management for heavy mining equipment, mobile fleet, and industrial plant assets. Maximum recovery, minimum downtime.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Asset Valuation</span>
+            <span class="svc-tag">Live Auctions</span>
+            <span class="svc-tag">Online Bidding</span>
+            <span class="svc-tag">Fleet Disposal</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+      <!-- 04 HEAVY LOGISTICS -->
+      <div class="svc-card" data-category="logistics">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-logistics"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">04</div>
+          <div class="svc-badge">Integrated</div>
+          <div class="svc-card-icon">🚛</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label">Integrated · Logistics</div>
+          <div class="svc-card-title">HEAVY LOGISTICS &amp; MATERIALS</div>
+          <p class="svc-card-desc">ROM pad management, waste removal, ore rehandling, stockpile management, and component transport. Fleet of 50+ articulated trucks and loaders deployed across multiple operations simultaneously.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">40–100t Haulers</span>
+            <span class="svc-tag">Load &amp; Haul</span>
+            <span class="svc-tag">Stockpile Mgmt</span>
+            <span class="svc-tag">Supply Chain</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+      <!-- 05 EARTHWORKS -->
+      <div class="svc-card" data-category="civil">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-earthworks"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">05</div>
+          <div class="svc-badge">Civil</div>
+          <div class="svc-card-icon">🏗️</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label">Civil · Earthworks</div>
+          <div class="svc-card-title">EARTHWORKS &amp; CIVIL</div>
+          <p class="svc-card-desc">Bulk earthworks, haul road construction and maintenance, tailings dam maintenance, and pad construction for mining camps and plant infrastructure in the Northern Cape basin.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Bulk Excavations</span>
+            <span class="svc-tag">Gravel Roads</span>
+            <span class="svc-tag">Tailings Dams</span>
+            <span class="svc-tag">Stormwater</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+      <!-- 06 PROJECT MANAGEMENT -->
+      <div class="svc-card" data-category="maintenance">
+        <div class="svc-card-top">
+          <div class="svc-card-img img-pm"></div>
+          <div class="svc-card-img-overlay"></div>
+          <div class="svc-card-num">06</div>
+          <div class="svc-badge">Full-Lifecycle</div>
+          <div class="svc-card-icon">📐</div>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-label">Full-Lifecycle · Management</div>
+          <div class="svc-card-title">PROJECT MANAGEMENT</div>
+          <p class="svc-card-desc">Full life-cycle planning, procurement, contractor supervision, and cost control for mining infrastructure upgrades, shutdowns, and plant modifications across all active contracts.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">EPCM Support</span>
+            <span class="svc-tag">Shutdown Planning</span>
+            <span class="svc-tag">Safety Files</span>
+            <span class="svc-tag">Procurement</span>
+          </div>
+          <span class="svc-arrow">View Details</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ FEATURED CONTRACT ═══════════════════ -->
+<section class="featured-section">
+  <div class="s-inner">
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <p class="s-tag" style="color:var(--red-light)"><span class="dot" style="background:var(--red-light)"></span> Current Work · Sishen 2026</p>
+      <h2 class="s-title" style="color:#fff;">SERVICE IN<br><span class="t-red">ACTION</span></h2>
+    </div>
+    <div class="featured-card reveal" style="transition-delay:0.15s">
+      <div class="featured-bg"></div>
+      <div class="featured-overlay"></div>
+      <div class="featured-content">
+        <div class="featured-tag">Materials Handling · 24-Month Contract · Kumba Sishen</div>
+        <h3 class="featured-title">Kumba Ultraclass Fleet<br>Maintenance Area — Kathu</h3>
+        <p class="featured-body">Waste removal, component handling, inventory management, and daily availability monitoring for Kumba Iron Ore's ultraclass fleet zone. Zero LTI across the full scope. Delivered on time, every shift.</p>
+        <div style="margin-top:2rem;">
+          <button class="btn-primary">View Full Case Study</button>
+        </div>
+      </div>
+      <!-- Glass KPI panel -->
+      <div class="featured-kpis">
+        <div class="kpi-glass">
+          <div class="kpi-num r">98%</div>
+          <div class="kpi-label">Fleet Availability Rate</div>
+        </div>
+        <div class="kpi-glass">
+          <div class="kpi-num g">17k</div>
+          <div class="kpi-label">Tonnes Moved to Date</div>
+        </div>
+        <div class="kpi-glass">
+          <div class="kpi-num">450</div>
+          <div class="kpi-label">Daily Operational Checks</div>
+        </div>
+        <div class="kpi-glass">
+          <div class="kpi-num g">0</div>
+          <div class="kpi-label">LTI — Zero Harm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FLEET ═══════════════════ -->
+<section class="fleet-section">
+  <div class="fleet-bg"></div>
+  <div class="fleet-overlay"></div>
+  <div class="fleet-inner">
+    <div class="reveal">
+      <p class="s-tag" style="color:rgba(255,255,255,0.35)"><span class="dot" style="background:var(--red-light)"></span> Specialised Equipment</p>
+      <h2 class="s-title" style="color:#fff;">OUR FLEET &amp;<br><span class="t-green">ASSETS</span></h2>
+    </div>
+    <div class="fleet-grid">
+      <div class="fleet-card reveal" style="transition-delay:0.05s">
+        <span class="fleet-icon">🚜</span>
+        <div class="fleet-num">40+</div>
+        <div class="fleet-label">ADTs (40–60t)</div>
+        <div class="fleet-detail">Articulated dump trucks for bulk material movement and waste haulage across all operations</div>
+      </div>
+      <div class="fleet-card reveal" style="transition-delay:0.12s">
+        <span class="fleet-icon">🦺</span>
+        <div class="fleet-num">18</div>
+        <div class="fleet-label">Excavators</div>
+        <div class="fleet-detail">CAT and Komatsu units ranging from 20t to 100t across all active sites in the basin</div>
+      </div>
+      <div class="fleet-card reveal" style="transition-delay:0.2s">
+        <span class="fleet-icon">⚙️</span>
+        <div class="fleet-num">12</div>
+        <div class="fleet-label">Dozers (D8–D10)</div>
+        <div class="fleet-detail">Heavy-duty blade work, road construction, and push-dozing operations at Sishen and Kolomela</div>
+      </div>
+      <div class="fleet-card reveal" style="transition-delay:0.28s">
+        <span class="fleet-icon">🏗️</span>
+        <div class="fleet-num">6</div>
+        <div class="fleet-label">Mobile Cranes</div>
+        <div class="fleet-detail">80t to 200t all-terrain cranes for component lifts, shutdowns and plant installations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ DIFFERENTIATORS ═══════════════════ -->
+<section class="diff-section">
+  <div class="s-inner">
+    <div class="reveal">
+      <p class="s-tag" style="color:var(--red)"><span class="dot" style="background:var(--red)"></span> Why Choose Loropo</p>
+      <h2 class="s-title" style="color:#0a0a0a;">THE LOROPO<br><span class="t-red">DIFFERENCE</span></h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card reveal" style="transition-delay:0.05s">
+        <span class="diff-icon">⛑️</span>
+        <div class="diff-title">Safety Case — FPS Driven</div>
+        <p class="diff-text">Every service line operates under our Fatality Prevention Standards. ISO 45001 certified. 5 million LTI-free hours. Zero fatalities on record across all contracts.</p>
+        <span class="diff-pill">5M+ LTI-Free Hours</span>
+      </div>
+      <div class="diff-card reveal" style="transition-delay:0.1s">
+        <span class="diff-icon">⚡</span>
+        <div class="diff-title">24/7 · 365 Emergency Response</div>
+        <p class="diff-text">All service lines backed by on-call breakdown teams. 2-hour mobilisation guaranteed within the Kathu / Sishen corridor — any time, any day.</p>
+        <span class="diff-pill g">2-Hour Response</span>
+      </div>
+      <div class="diff-card reveal" style="transition-delay:0.15s">
+        <span class="diff-icon">📋</span>
+        <div class="diff-title">Triple ISO Certified</div>
+        <p class="diff-text">ISO 9001 (Quality), 45001 (Safety), 14001 (Environment) — independently audited annually. JQS and DMR compliant across all vendor qualifications.</p>
+        <span class="diff-pill">ISO 9001 · 45001 · 14001</span>
+      </div>
+      <div class="diff-card reveal" style="transition-delay:0.2s">
+        <span class="diff-icon">👷🏾</span>
+        <div class="diff-title">Local Workforce First</div>
+        <p class="diff-text">82% of service crews sourced from the John Taolo Gaetsewe District. Skills development and apprenticeship programmes embedded in every contract scope.</p>
+        <span class="diff-pill g">82% Local Employment</span>
+      </div>
+      <div class="diff-card reveal" style="transition-delay:0.25s">
+        <span class="diff-icon">🤝</span>
+        <div class="diff-title">Level 1 B-BBEE Partner</div>
+        <p class="diff-text">100% black-owned with Level 1 B-BBEE status — giving your business maximum procurement recognition and transformation value on every rand spent.</p>
+        <span class="diff-pill">Level 1 · Verified 2026</span>
+      </div>
+      <div class="diff-card reveal" style="transition-delay:0.3s">
+        <span class="diff-icon">📊</span>
+        <div class="diff-title">Proven Track Record</div>
+        <p class="diff-text">14+ years, R2.4B project pipeline, 20 active contracts, 94% client retention. Recognised as Kumba's best safety performer in 2025.</p>
+        <span class="diff-pill g">Kumba Safety Award 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ═══════════════════ EMERGENCY BANNER ═══════════════════ -->
+<div class="emergency">
+  <div class="emergency-bg"></div>
+  <div class="emergency-overlay"></div>
+  <div class="emergency-inner">
+    <div class="emergency-left">
+      <h3>24/7 EMERGENCY<br>BREAKDOWN<br>RESPONSE</h3>
+      <p>On-call crews. 2-hour mobilisation.<br>Kathu · Sishen · Hotazel · Kolomela.</p>
+    </div>
+    <div class="emergency-right">
+      <div>
+        <div class="emergency-sub">Emergency Line</div>
+        <div class="emergency-num">+27 (0)53 712 3456</div>
+      </div>
+      <button class="btn-emergency">Call Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section">
+  <div style="position:relative;z-index:2;">
+    <p class="s-tag" style="color:rgba(255,255,255,0.28);justify-content:center;margin-bottom:0.8rem;"><span class="dot" style="background:var(--red)"></span> Request a Service</p>
+    <h2 class="s-title" style="color:#fff;">NEED A<br><span class="t-red">SOLUTION?</span></h2>
+    <p style="font-family:'Barlow';font-weight:300;color:rgba(255,255,255,0.38);max-width:400px;margin:1rem auto;line-height:1.7;font-size:0.93rem;">Our engineering team customises scopes for shaft, plant, surface, or logistics challenges — and mobilises within 48 hours.</p>
+    <div class="cta-glass-strip reveal">
+      <div class="cta-cell"><span>Location</span><strong>📍 Kathu, NC</strong></div>
+      <div class="cta-cell"><span>Direct Line</span><strong>📞 +27 (0)53 712 3456</strong></div>
+      <div class="cta-cell"><span>Email</span><strong>✉️ info@loropo.co.za</strong></div>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-primary">Request Service Proposal</button>
+      <a href="#" class="btn-outline">Download Capabilities ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">LOROPO INDUSTRIES</div>
+        <p class="footer-tagline">Integrated mining support services across the Northern Cape basin. Est. 2008. Built to last.</p>
+        <div class="footer-dots">
+          <div class="footer-dot" style="background:var(--red)"></div>
+          <div class="footer-dot" style="background:var(--green-light)"></div>
+          <div class="footer-dot" style="background:rgba(255,255,255,0.18)"></div>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Plant Maintenance</a></li>
+          <li><a href="#">Equipment Repair</a></li>
+          <li><a href="#">Auctioneering</a></li>
+          <li><a href="#">Heavy Logistics</a></li>
+          <li><a href="#">Shaft Sinking</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">B-BBEE Certificate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Loropo Industries Pty Ltd · All Rights Reserved</span>
+      <div class="footer-sub-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">B-BBEE Cert</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── CURSOR ─── */
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function loop(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.svc-card,.fleet-card,.diff-card,.kpi-glass,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('hovered'));
+});
+
+/* ─── HERO BG ─── */
+setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),80);
+
+/* ─── MOBILE NAV ─── */
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
+
+/* ─── SCROLL REVEAL ─── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(r=>obs.observe(r));
+
+/* ─── NAV SCROLL ─── */
+const nav=document.getElementById('mainNav');
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  if(heroBg) heroBg.style.transform=`translateY(${window.scrollY*0.3}px)`;
+});
+
+/* ─── FILTER ─── */
+const filterBtns=document.querySelectorAll('.filter-btn');
+const svcCards=document.querySelectorAll('.svc-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    svcCards.forEach(card=>{
+      if(f==='all'||card.dataset.category===f){
+        card.classList.remove('dimmed');
+      } else {
+        card.classList.add('dimmed');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
